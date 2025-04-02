@@ -40,9 +40,12 @@ export default defineConfig({
       historyApiFallback: {
         disableDotRule: true,
         rewrites: [
-          { from: /\/login/, to: '/index.html' },
-          { from: /\/.*/, to: '/index.html' } 
-        ]
+  { from: /^\/login$/, to: '/index.html' },
+  {
+    from: /^(?!\/assets\/).*/,
+    to: '/index.html'
+  }
+]
       }
     },
     preview: {
