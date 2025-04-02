@@ -1,3 +1,9 @@
+import { Routes, Route, Navigate } from "react-router-dom";
+import routesConfig from "./routes";
+import R404 from "@/pages/404";
+import { useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+
 const AppRoutes = () => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -21,4 +27,4 @@ const AppRoutes = () => {
   );
 };
 
-
+export default AppRoutes;
