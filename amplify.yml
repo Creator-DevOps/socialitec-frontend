@@ -4,7 +4,6 @@ frontend:
     preBuild:
       commands:
         - bun install
-        - ls -l dist/
     build:
       commands:
         - bun run build
