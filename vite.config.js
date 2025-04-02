@@ -25,5 +25,25 @@ export default defineConfig({
       '@router': path.resolve(__dirname, 'src/router'),
       '@base': path.resolve(__dirname, './'), 
     },
+    build: {
+      outDir: 'dist',
+      emptyOutDir: true,
+      rollupOptions: {
+        output: {
+          assetFileNames: 'assets/[name]-[hash][extname]',
+          entryFileNames: 'assets/[name]-[hash].js',
+          chunkFileNames: 'assets/[name]-[hash].js',
+        }
+      }
+    },
+    server: {
+      historyApiFallback: {
+        disableDotRule: true,
+        rewrites: [
+          { from: /\/login/, to: '/index.html' },
+          { from: /\/.*/, to: '/index.html' } 
+        ]
+      }
+    },
   },
 });
