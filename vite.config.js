@@ -22,7 +22,6 @@ export default defineConfig({
       '@pages': path.resolve(__dirname, 'src/pages'),
       '@modules': path.resolve(__dirname, 'src/components/modules'),
       '@router': path.resolve(__dirname, 'src/router'),
-      '@base': path.resolve(__dirname, './'), 
     },
   },
 });
