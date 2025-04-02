@@ -1,0 +1,80 @@
+{
+  "TITLE": "SocialITEC",
+  "DELETE": "Eliminar",
+  "CANCEL": "Cancelar",
+  "CONFIRM": "Confirmar",
+  "ERROR404": {
+    "TITLE": "¡Página no encontrada!",
+    "MESSAGE": "Al parecer no fue posible encontrar la página. Intenta mas tarde",
+    "BACK": "Regresar"
+  },
+  "LAYOUT": {
+    "HEADER": {
+      "ABOUTTEC": "TecNM",
+      "SERVICE": "Servicio Social",
+      "SOCIALITEC": "SocialITEC",
+      "USER_ICON": "Abrir menú de usuario",
+      "BAR_ICON": "Abrir barra lateral",
+      "CHANGE_LANGUAGE": "Cambiar idioma"
+    },
+    "SIDEBAR": {
+      "TITLE": "SocialITEC",
+      "CLOSE_SIDEBAR": "Cerrar barra lateral"
+    },
+    "USER_MENU": {
+      "LOGOUT": {
+        "TITLE": "Cerrar sesión",
+        "TITLE2": "Salir",
+        "CONFIRM": "¿Deseas cerrar sesión?",
+        "TEXT": "Esta acción cerrará la sesión actual y te regresará a la pantalla de inicio.",
+        "CONFIRM_BUTTON": "Cerrar",
+        "CANCEL_BUTTON": "Cancelar"
+      }
+    },
+    "FOOTER": {
+      "TITLE": "El uso del sistema esta bajo la responsabilidad de cada uno de los usuarios"
+    }
+  },
+  "VIEWER": {
+    "SIDEBAR": {
+    }
+  },
+  "LOGIN": {
+    "HEADER": {
+      "ABOUTTEC": "TecNM",
+      "SERVICE": "Servicio Social",
+      "SOCIALITEC": "SocialITEC"
+    },
+    "FORGOT_PASSWORD": "¿Olvidaste tu contraseña?",
+    "INVALID_EMAIL": "Número de control inválido",
+    "INVALID_PASSWORD": "Contraseña inválida",
+    "INVALID_CAPTCHA": "Captcha inválido",
+    "FORM": {
+      "TITLE": "Iniciar sesión",
+      "LOGIN": "Acceder",
+      "LOGOUT": "Cerrar sesión",
+      "EMAIL": "Correo institucional",
+      "EMAIL_PLACEHOLDER": "Ingresa tu correo institucional",
+      "EMAIL_REQUIRED": "El correo institucional es requerido",
+      "PASSWORD": "Contraseña",
+      "PASSWORD_PLACEHOLDER": "Ingresa tu contraseña",
+      "PASSWORD_REQUIRED": "La contraseña es requerida"
+    },
+    "FOOTER": {
+      "ADDRESS": {
+        "TITLE": "Dirección",
+        "ITEM": "Datos de dirección y ubicación"
+      },
+      "INFORMATION": {
+        "TITLE": "Información",
+        "ITEM": "Términos y condiciones",
+        "ITEM2": "Política de privacidad",
+        "ITEM3": "Preguntas frecuentes"
+      },
+      "ABOUT": {
+        "TITLE": "Sobre nosotros",
+        "ITEM": "Acerca de nosotros"
+      }
+    }
+  }
+}

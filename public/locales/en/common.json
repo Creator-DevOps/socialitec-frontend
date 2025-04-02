@@ -1,0 +1,126 @@
+{
+  "TITLE": "SocialITEC",
+  "DELETE": "Delete",
+  "CANCEL": "Cancel",
+  "CONFIRM": "Confirm",
+  "ERROR404": {
+    "TITLE": "Page not found!",
+    "MESSAGE": "It seems the page could not be found. Please try again later",
+    "BACK": "Go back"
+  },
+  "LAYOUT": {
+    "HEADER": {
+      "ABOUTTEC": "TecNM",
+      "SERVICE": "Social Service",
+      "SOCIALITEC": "SocialITEC",
+      "USER_ICON": "Open user menu",
+      "CHAT_ICON": "New chat",
+      "BAR_ICON": "Open sidebar",
+      "CHANGE_LANGUAGE": "Change language"
+    },
+    "SIDEBAR": {
+      "TITLE": "SocialITEC",
+      "CLOSE_SIDEBAR": "Close sidebar",
+      "CHAT_ICON": "New chat"
+    },
+    "USER_MENU": {
+      "SETTINGS": {
+        "TITLE": "Settings",
+        "NAME": "NAME",
+        "EMAIL": "EMAIL",
+        "ROLE": "ROLE",
+        "DELETE_ALL": {
+          "TITLE": "DELETE ALL",
+          "CONFIRM": "Do you want to delete all conversations?",
+          "TEXT": "This action will delete all conversation history.",
+          "CONFIRM_BUTTON": "Delete",
+          "CANCEL_BUTTON": "Cancel"
+        },
+        "DELETE_ACCOUNT": {
+          "TITLE": "DELETE ACCOUNT",
+          "CONFIRM": "Do you want to delete your account?",
+          "TEXT": "This action will permanently delete your account and cannot be undone.",
+          "CONFIRM_BUTTON": "Delete",
+          "CANCEL_BUTTON": "Cancel"
+        }
+      },
+      "LOGOUT": {
+        "TITLE": "Log out",
+        "TITLE2": "Exit",
+        "CONFIRM": "Do you want to log out?",
+        "TEXT": "This action will log you out and return you to the home screen.",
+        "CONFIRM_BUTTON": "Log out",
+        "CANCEL_BUTTON": "Cancel"
+      }
+    },
+    "FOOTER": {
+      "TITLE": "System usage is the responsibility of each user"
+    }
+  },
+  "VIEWER": {
+    "MAIN_AREA": {
+      "QUESTION": "What would you like to do today?",
+      "TEXT_AREA_PLACEHOLDER": "Ask anything",
+      "SEND_ICON": "Consult",
+      "COPY": "Copy",
+      "COPY_MESSAGE": "Copied to clipboard"
+    },
+    "SIDEBAR": {
+      "SEARCH": {
+        "TITLE": "Search",
+        "PLACEHOLDER": "Search",
+        "SEARCH_ICON": "Search"
+      },
+      "CONVERSATIONS": {
+        "TODAY": "Today",
+        "SEVEN_DAYS": "Last 7 days",
+        "THIRTY_DAYS": "Last 30 days",
+        "DELETE": {
+          "TITLE": "Delete",
+          "CONFIRM": "Do you want to delete the conversation?",
+          "TEXT": "This action will delete the conversation <strong>\"{{title}}\"</strong> and cannot be undone.",
+          "CONFIRM_BUTTON": "Delete",
+          "CANCEL_BUTTON": "Cancel"
+        }
+      }
+    }
+  },
+  "LOGIN": {
+    "HEADER": {
+      "ABOUTTEC": "TecNM",
+      "SERVICE": "Social Service",
+      "SOCIALITEC": "SocialITEC"
+    },
+    "FORGOT_PASSWORD": "Forgot your password?",
+    "INVALID_EMAIL": "Invalid control number",
+    "INVALID_PASSWORD": "Invalid password",
+    "INVALID_CAPTCHA": "Invalid captcha",
+    "FORM": {
+      "TITLE": "Login",
+      "LOGIN": "Login",
+      "LOGOUT": "Log out",
+      "EMAIL": "Institutional email",
+"EMAIL_PLACEHOLDER": "Enter your institutional email",
+"EMAIL_REQUIRED": "Institutional email is required",
+      "PASSWORD": "Password",
+      "PASSWORD_PLACEHOLDER": "Enter your password",
+      "PASSWORD_REQUIRED": "Password is required"
+    },
+    "FOOTER": {
+      "ADDRESS": {
+        "TITLE": "Address",
+        "ITEM": "Address and location details"
+      },
+      "INFORMATION": {
+        "TITLE": "Information",
+        "ITEM": "Terms and conditions",
+        "ITEM2": "Privacy policy",
+        "ITEM3": "Frequently asked questions"
+      },
+      "ABOUT": {
+        "TITLE": "About us",
+        "ITEM": "About us"
+      }
+    }
+  }
+}

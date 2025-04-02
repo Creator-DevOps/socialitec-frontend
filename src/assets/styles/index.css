@@ -1,0 +1,43 @@
+@import "tailwindcss";
+@import "@styles/global.css";
+
+/*fonts and colors to app*/
+@theme {
+  /*Fonts*/
+  --font-montserrat: "Montserrat", sans-serif;
+  --font-montserrat-thin: "Montserrat", sans-serif;
+  --font-montserrat-extralight: "Montserrat", sans-serif;
+  --font-montserrat-light: "Montserrat", sans-serif;
+  --font-montserrat-regular: "Montserrat", sans-serif;
+  --font-montserrat-medium: "Montserrat", sans-serif;
+  --font-montserrat-semibold: "Montserrat", sans-serif;
+  --font-montserrat-bold: "Montserrat", sans-serif;
+  --font-montserrat-extrabold: "Montserrat", sans-serif;
+  --font-montserrat-black: "Montserrat", sans-serif;
+
+  /*Colors*/
+
+  /* Colores */
+  --color-primary: #002855;
+  --color-secondary: #0f3c84;
+  --color-tertiary: #0e4ab4;
+  --color-black: #18192e;
+  --color-gray-fondo: #f5f5f5;
+  --color-gray-100: #e5e5e5;
+  --color-gray-75: #f0f0f0; /* Un gris más claro */
+  --color-gray-50: #f7f7f7; /* Aún más claro */
+  --color-gray-25: #fcfcfc; /* Casi blanco */
+  --color-red: #ed1c24;
+  --color-red-light: #ff242b;
+  --color-yellow: #ffdd00;
+  --color-red-light: #ffe033;
+  --color-transparente: rgba(229, 229, 229, 0.7);
+}
+p {
+  font-size: 14px;
+}
+@media (max-width: 640px) {
+  p {
+    font-size: 12px;
+  }
+}
