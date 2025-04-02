@@ -3,8 +3,9 @@ frontend:
   phases:
     preBuild:
       commands:
+        - curl -fsSL https://bun.sh/install | bash
+        - export PATH="$HOME/.bun/bin:$PATH"
         - bun install
-        - ls -l dist/
     build:
       commands:
         - bun run build
@@ -15,3 +16,4 @@ frontend:
   cache:
     paths:
       - node_modules/**/*
+      - .bun/**/*
