@@ -5,6 +5,7 @@ import tailwindcss from "@tailwindcss/vite";
 import path from "path";
 
 export default defineConfig({
+   base: './',
   plugins: [react(), tailwindcss()],
   resolve: {
     alias: {
@@ -22,6 +23,7 @@ export default defineConfig({
       '@pages': path.resolve(__dirname, 'src/pages'),
       '@modules': path.resolve(__dirname, 'src/components/modules'),
       '@router': path.resolve(__dirname, 'src/router'),
+      '@base': path.resolve(__dirname, './'), 
     },
   },
 });
