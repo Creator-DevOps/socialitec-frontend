@@ -3,8 +3,7 @@ frontend:
   phases:
     preBuild:
       commands:
-        - curl -fsSL https://bun.sh/install | bash
-        - export PATH="$HOME/.bun/bin:$PATH"
+        - npm install -g bun
         - bun install
     build:
       commands:
@@ -18,14 +17,13 @@ frontend:
       - node_modules/**/*
       - .bun/**/*
 
+customHeaders:
+  - pattern: '**/*'
+    headers:
+      - key: Cache-Control
+        value: 'no-cache, no-store, must-revalidate'
 
-redirects:
-  - source: /<*>
+rewrites:
+  - source: '</^[^.]+$|\\.(?!(css|gif|ico|jpg|js|png|txt|svg|woff|ttf|map|json)$)([^.]+$)/>'
     target: /index.html
-    status: 200
-  - source: /<*>/
-    target: /index.html
-    status: 200
-  - source: /assets/<*>
-    target: /assets/<*>
-    status: 200
+    status: '200'
