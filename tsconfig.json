@@ -39,7 +39,6 @@
       "@pages/*": ["src/pages/*"],
       "@modules/*": ["src/components/modules/*"],
       "@router/*": ["src/router/*"],
-      "@base/*": ["./*"],
       
     },
     "target": "ESNext",
