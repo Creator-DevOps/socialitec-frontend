@@ -9,11 +9,17 @@ const AppRoutes = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const hasTrailingSlash =
-      location.pathname.length > 1 && location.pathname.endsWith("/");
-    if (hasTrailingSlash) {
-      const newPath = location.pathname.replace(/\/+$/, "");
-      navigate(newPath + location.search, { replace: true });
+    const isFirstLoad =
+      performance.getEntriesByType("navigation")[0]?.type === "navigate";
+
+    if (!isFirstLoad) {
+      const hasTrailingSlash =
+        location.pathname.length > 1 && location.pathname.endsWith("/");
+
+      if (hasTrailingSlash) {
+        const newPath = location.pathname.replace(/\/+$/, "");
+        navigate(newPath + location.search, { replace: true });
+      }
     }
   }, [location.pathname, location.search, navigate]);
 
@@ -29,3 +35,4 @@ const AppRoutes = () => {
 };
 
 export default AppRoutes;
+
