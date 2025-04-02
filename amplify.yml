@@ -3,12 +3,10 @@ frontend:
   phases:
     preBuild:
       commands:
-        - curl -fsSL https://bun.sh/install | bash
-        - export PATH="$HOME/.bun/bin:$PATH"
-        - bun install
+        - curl -fsSL https://bun.sh/install | bash && export PATH="$HOME/.bun/bin:$PATH" && bun install
     build:
       commands:
-        - bun run build
+        - export PATH="$HOME/.bun/bin:$PATH" && bun run build
   artifacts:
     baseDirectory: dist
     files:
@@ -17,3 +15,26 @@ frontend:
     paths:
       - node_modules/**/*
       - .bun/**/*
+  redirects:
+    - source: /index.html
+      target: /index.html
+      status: 200
+    - source: /assets/<*>
+      target: /assets/<*>
+      status: 200
+    - source: /<*>.js
+      target: /<*>.js
+      status: 200
+    - source: /<*>.css
+      target: /<*>.css
+      status: 200
+    - source: /<*>.png
+      target: /<*>.png
+      status: 200
+    - source: /<*>.svg
+      target: /<*>.svg
+      status: 200
+    - source: /<*>
+      target: /index.html
+      status: 200
+
