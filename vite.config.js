@@ -1,15 +1,14 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
-
 import path from "path";
 
 export default defineConfig({
-   base: './',
+  base: './',
   plugins: [react(), tailwindcss()],
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, 'src'), 
+      '@': path.resolve(__dirname, 'src'),
       '@components': path.resolve(__dirname, 'src/components'),
       '@layouts': path.resolve(__dirname, 'src/components/layouts'),
       '@assets': path.resolve(__dirname, 'src/assets'),
@@ -23,33 +22,30 @@ export default defineConfig({
       '@pages': path.resolve(__dirname, 'src/pages'),
       '@modules': path.resolve(__dirname, 'src/components/modules'),
       '@router': path.resolve(__dirname, 'src/router'),
-      '@base': path.resolve(__dirname, './'), 
-    },
-    build: {
-      outDir: 'dist',
-      emptyOutDir: true,
-      rollupOptions: {
-        output: {
-          assetFileNames: 'assets/[name]-[hash][extname]',
-          entryFileNames: 'assets/[name]-[hash].js',
-          chunkFileNames: 'assets/[name]-[hash].js',
-        }
-      }
-    },
-    server: {
-      historyApiFallback: {
-        disableDotRule: true,
-        rewrites: [
-  { from: /^\/login$/, to: '/index.html' },
-  {
-    from: /^(?!\/assets\/).*/,
-    to: '/index.html'
-  }
-]
-      }
-    },
-    preview: {
-      historyApiFallback: true 
+      '@base': path.resolve(__dirname, './'),
     }
   },
+  build: {
+    outDir: 'dist',
+    emptyOutDir: true,
+    rollupOptions: {
+      output: {
+        assetFileNames: 'assets/[name]-[hash][extname]',
+        entryFileNames: 'assets/[name]-[hash].js',
+        chunkFileNames: 'assets/[name]-[hash].js',
+      }
+    }
+  },
+  server: {
+    historyApiFallback: {
+      disableDotRule: true,
+      rewrites: [
+        { from: /^\/login$/, to: '/index.html' },
+        { from: /^(?!\/assets\/).*/, to: '/index.html' }
+      ]
+    }
+  },
+  preview: {
+    historyApiFallback: true
+  }
 });
