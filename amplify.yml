@@ -4,10 +4,11 @@ frontend:
     preBuild:
       commands:
         - curl -fsSL https://bun.sh/install | bash
-        - ~/.bun/bin/bun install
+        - export PATH="$HOME/.bun/bin:$PATH"
+        - bun install
     build:
       commands:
-        - ~/.bun/bin/bun run build
+        - bun run build
   artifacts:
     baseDirectory: dist
     files:
