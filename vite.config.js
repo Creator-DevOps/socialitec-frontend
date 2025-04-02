@@ -40,12 +40,20 @@ export default defineConfig({
     historyApiFallback: {
       disableDotRule: true,
       rewrites: [
-        { from: /^\/login$/, to: '/index.html' },
-        { from: /^(?!\/assets\/).*/, to: '/index.html' }
+        { from: /\/$/, to: '/index.html' },
+        { from: /./, to: '/index.html' }
       ]
     }
   },
   preview: {
-    historyApiFallback: true
+    port: 4173,
+    strictPort: true,
+    historyApiFallback: {
+      disableDotRule: true,
+      rewrites: [
+        { from: /\/$/, to: '/index.html' },
+        { from: /./, to: '/index.html' }
+      ]
+    }
   }
 });
