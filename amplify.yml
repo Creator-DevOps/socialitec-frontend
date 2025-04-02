@@ -17,7 +17,7 @@ frontend:
     paths:
       - node_modules/**/*
       - .bun/**/*
-  redirects:
+    redirects:
     - source: /index.html
       target: /index.html
       status: 200
@@ -36,6 +36,11 @@ frontend:
     - source: /<*>.svg
       target: /<*>.svg
       status: 200
+
+    - source: /<*>/
+      target: /index.html
+      status: 200
+
     - source: /<*>
       target: /index.html
       status: 200
