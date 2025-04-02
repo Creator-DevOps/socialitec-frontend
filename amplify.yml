@@ -36,7 +36,6 @@ frontend:
     - source: /<*>.svg
       target: /<*>.svg
       status: 200
-
     - source: /<*>/
       target: /index.html
       status: 200
