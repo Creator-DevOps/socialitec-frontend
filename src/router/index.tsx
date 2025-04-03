@@ -9,19 +9,18 @@ const AppRoutes = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const hasTrailingSlash =
-      location.pathname.length > 1 && location.pathname.endsWith("/");
-    if (hasTrailingSlash) {
-      const newPath = location.pathname.replace(/\/+$/, "");
-      navigate(newPath + location.search, { replace: true });
+    const { pathname, search, hash } = location;
+    if (pathname.length > 1 && pathname.endsWith("/")) {
+      const newPath = pathname.replace(/\/+$/, "");
+      navigate(`${newPath}${search}${hash}`, { replace: true });
     }
-  }, [location.pathname, location.search, navigate]);
+  }, [location, navigate]);
 
   return (
     <Routes>
       <Route path="/" element={<Navigate replace to="/login" />} />
       {routesConfig.map(({ path, element }) => (
-        <Route key={path} path={path} element={element} />
+        <Route key={path} path={`/${path}`} element={element} />
       ))}
       <Route path="*" element={<R404 />} />
     </Routes>

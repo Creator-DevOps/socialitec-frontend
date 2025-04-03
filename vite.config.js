@@ -25,4 +25,35 @@ export default defineConfig({
       '@base': path.resolve(__dirname, './'),
     }
   },
+  build: {
+    outDir: 'dist',
+    emptyOutDir: true,
+    rollupOptions: {
+      output: {
+        assetFileNames: 'assets/[name]-[hash][extname]',
+        entryFileNames: 'assets/[name]-[hash].js',
+        chunkFileNames: 'assets/[name]-[hash].js',
+      }
+    }
+  },
+  server: {
+    historyApiFallback: {
+      disableDotRule: true,
+      rewrites: [
+        { from: /\/$/, to: '/index.html' },
+        { from: /./, to: '/index.html' }
+      ]
+    }
+  },
+  preview: {
+    port: 4173,
+    strictPort: true,
+    historyApiFallback: {
+      disableDotRule: true,
+      rewrites: [
+        { from: /\/$/, to: '/index.html' },
+        { from: /./, to: '/index.html' }
+      ]
+    }
+  }
 });
