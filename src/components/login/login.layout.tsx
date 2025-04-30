@@ -16,10 +16,6 @@ const LoginLayout: React.FC = () => {
   const { t } = useTranslation();
   const [isSignUpOpen, setIsSignUpOpen] = useState<boolean>(false);
 
-  const handleLoginSubmit = (data: FormData) => {
-    console.log("Datos de inicio de sesión:", data);
-  };
-
   return (
     <div className="min-h-screen flex flex-col">
       <div className="flex flex-1 flex-col md:flex-row">
@@ -28,7 +24,7 @@ const LoginLayout: React.FC = () => {
           <Header />
           <div className="flex-1 flex items-center justify-center px-4">
             <div className="w-full max-w-md mx-auto my-20">
-              <FormLogin onSubmit={handleLoginSubmit} />
+              <FormLogin/>
             </div>
           </div>
         </div>

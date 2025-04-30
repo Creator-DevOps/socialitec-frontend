@@ -1,8 +1,8 @@
 import React from "react";
 
 import { useTranslation } from "react-i18next";
-import TEC from "@png/tec.png";
-import ITL from "@png/itl.png";
+import TEC from "@png/tec.svg";
+import ITL from "@png/itl.svg";
 
 const Branding = () => {
   const { t } = useTranslation();

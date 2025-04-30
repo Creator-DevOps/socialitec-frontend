@@ -1,22 +1,19 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
+import xIconUrl from '@icons/XW.svg';
+import errorIconUrl from '@icons/error.svg';
+import warningIconUrl from '@icons/warning.svg';
+import successIconUrl from '@icons/check_circle.svg';
+import notificationIconUrl from '@icons/info.svg';
 
-import XIcon from "@public/image/x.svg";
-import warningIcon from "../../../assets/images/warning.svg";
-import errorIcon from "../../../assets/images/error.svg";
-import infoIcon from "../../../assets/images/check.svg";
+export const ToastErrorBGColor        = '#FF242B';
+export const ToastWarningBGColor      = '#F97316';
+export const ToastSuccessBGColor      = '#0E4AB4';
+export const ToastNotificationBGColor = '#FFDD00';
 
-//ERROR
-export const ToastErrorBGColor = '#D84A49';
-export const ToastErrorIcon = '/image/error.svg';
-//WARNING
-export const ToastWarningBGColor = '#ECBF58';
-export const ToastWarningIcon = '/image/error.svg';
-//SUCCESS
-export const ToastSuccessBGColor = '#5BC3A2';
-export const ToastSuccessIcon = '/image/check.svg';
-//NOTIFICATION
-export const ToastNotificationBGColor = '#6FB1C7';
-export const ToastNotificationIcon = '/image/error.svg';
+export const ToastErrorIcon        = errorIconUrl;
+export const ToastWarningIcon      = warningIconUrl;
+export const ToastSuccessIcon      = successIconUrl;
+export const ToastNotificationIcon = notificationIconUrl;
 
 export type ToastObject = {
   id: number;
@@ -29,82 +26,66 @@ export type ToastObject = {
 };
 
 type Props = {
-  toastList: Array<ToastObject>;
-  position: "top-right" | "top-left" | "bottom-right" | "bottom-left";
+  toastList: ToastObject[];
+  position: 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left';
   autoDelete?: boolean;
   autoDeleteTime?: number;
   marginTop?: number;
+  removeToast: (id: number) => void;
 };
 
-export const Toast = ({
+const Toast: React.FC<Props> = ({
   toastList,
   position,
-  autoDelete,
-  autoDeleteTime,
+  autoDelete = false,
+  autoDeleteTime = 3000,
   marginTop = 0,
-}: Props) => {
-  const [list, setList] = useState(toastList);
-
+  removeToast,
+}) => {
   useEffect(() => {
-    setList([...toastList]);
-  }, [toastList]);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      if (
-        autoDelete &&
-        toastList.length &&
-        list.length &&
-        !toastList[0].fixed
-      ) {
-        if (!toastList[0].focused) {
-          deleteToast(toastList[0].id);
-        }
-
+    if (!autoDelete) return;
+    const timer = setTimeout(() => {
+      const first = toastList[0];
+      if (first && !first.fixed && !first.focused) {
+        removeToast(first.id);
       }
     }, autoDeleteTime);
-    return () => {
-      clearInterval(interval);
-    };
-    // eslint-disable-next-line
-  }, [toastList, autoDelete, autoDeleteTime, list]);
-
-  const deleteToast = (id: number) => {
-    const listItemIndex = list.findIndex((e: any) => e.id === id);
-    const toastListItem = toastList.findIndex((e: any) => e.id === id);
-    list.splice(listItemIndex, 1);
-    toastList.splice(toastListItem, 1);
-    setList([...list]);
-  };
+    return () => clearTimeout(timer);
+  }, [toastList, autoDelete, autoDeleteTime, removeToast]);
 
   return (
     <div
-      className={`notification-container flex flex-col gap-2  pointer-events-none`}
+      className={`notification-container flex flex-col gap-2 pointer-events-none ${position}`}
       style={{ top: marginTop + 10 }}
     >
-      {list.map((toast: ToastObject, i: number) => (
+      {toastList.map((toast) => (
         <div
-          key={i}
-          className={`rounded-md flex items-center gap-3 py-2 pr-1 px-[.7rem] shadow-md top-0 min-w-[200px] ${position} pointer-events-auto`}
+          key={toast.id}
+          className="rounded-md flex items-center gap-3 py-2 px-3 shadow-md pointer-events-auto"
           style={{ backgroundColor: toast.backgroundColor }}
-          onMouseEnter={() => { toast.focused = true; }}
-          onMouseLeave={() => { toast.focused = false; }}
+          onMouseEnter={() => (toast.focused = true)}
+          onMouseLeave={() => (toast.focused = false)}
         >
-          <div className="select-none pointer-events-none">
-            <img src={toast.icon} alt="" className="notification-img text-white" />
-          </div>
+          <img
+            src={toast.icon}
+            alt={toast.title ?? ''}
+            className="notification-img text-white h-5 w-5"
+          />
           <div className="flex flex-col items-start flex-1 text-white">
-            {toast.title && <p className="notification-title leading-snug select-none whitespace-nowrap">{toast.title}</p>}
-            {toast.description && <p className="notification-message leading-snug select-none">{toast.description}</p>}
+            {toast.title && (
+              <p className="notification-title font-semibold select-none whitespace-nowrap">
+                {toast.title}
+              </p>
+            )}
+            {toast.description && (
+              <p className="notification-message select-none">
+                {toast.description}
+              </p>
+            )}
           </div>
-          <div className='h-full flex items-start justify-start'>
-            <button onClick={() => deleteToast(toast.id)} className='hover:opacity-[0.7]'>
-              <div className='h-full p-2 -m-2 -mr-3 -mt-3'>
-                <XIcon  />
-              </div>
-
-            </button>
-          </div>
+          <button onClick={() => removeToast(toast.id)} className="p-1 hover:opacity-70">
+            <img src={xIconUrl} alt="Cerrar" className="h-4 w-4" />
+          </button>
         </div>
       ))}
     </div>

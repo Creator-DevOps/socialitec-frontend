@@ -39,12 +39,13 @@ const modalContainer = ({
     >
       <div
         className={classNames(
-          "relative bg-white shadow-lg flex flex-col m-auto max-h-[80%] overflow-hidden border border-gray-100",
-          { "w-80 md:w-3/4 lg:w-1/2 min-h-[120px]": auto_width }
+        
+          "relative bg-white shadow-xl flex flex-col m-auto max-h-[80%] overflow-hidden border border-gray-300 rounded-md",
+          { "w-80 md:w-3/5 lg:w-2/5 min-h-[120px]": auto_width }
         )}
         onClick={handleModalClick}
       >
-        <div className="overflow-y-auto flex-grow p-10">
+        <div className="overflow-y-auto flex-grow p-6">
           {children}
         </div>
       </div>
