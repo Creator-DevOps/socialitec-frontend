@@ -5,7 +5,7 @@ import EditIcon from "@icons/edit.svg";
 import DeleteIcon from "@icons/delete.svg";
 import EyeIcon from "@icons/eye.svg";
 import DownloadIcon from "@icons/download.svg";
-import DocumentIcon from "@icons/menu/Reports.svg";
+import ReportsIcon from "@icons/menu/reports.svg";
 import DotsIcon from "@icons/miniMenu.svg";
 import { Report } from "@lib/api/models/report";
 import { useReports } from "./requestPanel-context";
@@ -34,7 +34,7 @@ const ReportCard = ({ item }: Props) => {
         </div>
 
         <div className="h-1/3 flex items-center justify-center">
-          <img src={DocumentIcon} alt={"Document"} className="w-8 h-8 md:w-10 md:h-10 object-contain" />
+          <img src={ReportsIcon} alt={"Document"} className="w-8 h-8 md:w-10 md:h-10 object-contain" />
         </div>
 
         
