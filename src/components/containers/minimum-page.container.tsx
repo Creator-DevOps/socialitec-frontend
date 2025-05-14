@@ -18,13 +18,13 @@ const MinimumPageContainer: FC<Props> = ({
     <div
       id={id}
       className={classNames({
-        "w-full max-h-full h-full min-h-screen flex flex-col": true,
+        "w-full min-h-screen flex flex-col": true,
         [`${className}`]: true && className,
         white: bg_color == true,
         "bg-white": !bg_color,
       })}
     >
-      <div className="h-full flex flex-col flex-1">{children}</div>
+      <div className="h-full flex-1 flex flex-col">{children}</div>
     </div>
   );
 };

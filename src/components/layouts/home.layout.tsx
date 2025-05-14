@@ -38,12 +38,12 @@ const HomeLayout: React.FC<HomeLayoutProps> = ({ children }) => {
   }, []);
 
   return (
-    <div className="flex h-full">
+    <div className="w-full h-screen flex overflow-hidden">
       {sidebarElement}
 
-      <MinimumPageContainer className="flex-1 flex flex-col">
+      <MinimumPageContainer>
         <Header sidebarOpen={sidebarOpen} onSidebarOpen={() => { setSidebarOpen(true); setRagDisabled(false); }} />
-        <main className="flex-1 flex flex-col h-full min-h-0">
+        <main className="flex-1 flex min-h-0">
           <ContentArea>{mainContent}</ContentArea>
         </main>
         <Footer />

@@ -13,21 +13,84 @@ const AboutUs = () => {
         <Header />
       </div>
 
-      <div className="flex flex-col flex-1 items-center py-25 px-6 ">
-        <h1 className="font-bold text-xl sm:text-6xl text-primary text-center">
-          Servicio Social
-        </h1>
-        <img src={Icon} alt="Icon" className="w-20 sm:w-50" />
-        <span className="text-sm sm:text-base text-justify min-w-1/2 max-w-[95%] sm:max-w-1/2 leading-[1.5]">
-          Somos RAGBridge, un equipo multidisciplinario dedicado a simplificar la
-          gestión de contenido para empresas que buscan potenciar sus soluciones
-          con texto generativo. Nuestra misión es ofrecer una plataforma intuitiva,
-          segura y escalable que centralice todos tus recursos (textos, imágenes,
-          videos y más) en un solo lugar. Con un enfoque centrado en la experiencia
-          de usuario, facilitamos la creación, edición y publicación de información
-          relevante, permitiéndote llegar a tus clientes de forma rápida, consistente y
-          sin necesidad de conocimientos técnicos.
-        </span>
+      <div className="flex flex-col flex-1 items-center py-30 px-6 justify-center ">
+        <div className="flex flex-col flex-1 text-justify justify-center items-center w-full md:w-[70%] gap-10 ">
+          <section className="flex flex-col gap-2">
+            <h1 className="font-bold text-xl md:text-3xl text-primary text-center">
+              Servicio Social
+            </h1>
+            <p>
+              El Servicio Social es una actividad obligatoria y temporal que
+              permite a los estudiantes del TecNM aplicar sus conocimientos en
+              beneficio de la sociedad. Es un requisito indispensable para la
+              titulación profesional.
+            </p>
+          </section>
+          <section className="flex flex-col gap-2">
+            <h2 className="font-bold text-xl sm:text-2xl text-primary text-center">
+             Requisitos
+            </h2>
+            <ul className="list-disc text-left px-10">
+              <li>
+              Haber aprobado al menos el 70% de los créditos del plan de estudios.
+              </li>
+              <li>
+              Estar inscrito al momento de registrar el Servicio Social.
+              </li>
+              <li>
+              Contar con un correo institucional.
+              </li>
+            </ul>
+          </section>
+          <section className="flex flex-col gap-2">
+            <h2 className="font-bold text-xl sm:text-2xl text-primary text-center">
+              Duración y créditos
+            </h2>
+            <p>
+              El Servicio Social debe cubrir un mínimo de 480 horas en un
+              periodo no menor a seis meses ni mayor a dos años.
+            </p>
+          </section>
+
+          <section className="flex flex-col gap-2">
+            <h2 className="font-bold text-xl sm:text-2xl text-primary text-center">
+              ¿Dónde se puede realizar?
+            </h2>
+            <ul className="list-disc text-left px-10">
+              <li>
+                <strong>Instituciones públicas: </strong>Dependencias
+                municipales, estatales o federales.
+              </li>
+              <li>
+                <strong>Organizaciones no gubernamentales: </strong>ONG en áreas
+                como educación, salud o medio ambiente.
+              </li>
+              <li>
+                <strong>Proyectos internos: </strong>Programas desarrollados
+                dentro del TecNM con impacto social.
+              </li>
+            </ul>
+          </section>
+          <section className="flex flex-col gap-2">
+            <h2 className="font-bold text-xl sm:text-2xl text-primary text-center">
+              Beneficios del Servicio Social
+            </h2>
+            <ul className="list-disc text-left px-10">
+              <li>
+                <strong>Aplicación práctica: </strong>Utilizar conocimientos
+                adquiridos en situaciones reales.
+              </li>
+              <li>
+                <strong>Desarrollo profesional: </strong>Fortalecer habilidades
+                como liderazgo y trabajo en equipo.
+              </li>
+              <li>
+                <strong>Requisito de titulación: </strong>Es necesario para
+                obtener el título profesional.
+              </li>
+            </ul>
+          </section>
+        </div>
       </div>
       <Footer />
     </div>

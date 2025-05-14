@@ -6,13 +6,15 @@ import Loader from "@components/ui-componets/load/Loader";
 import "@base/i18n";
 import "@styles/global.css";
 import { BrowserRouter } from "react-router-dom";
+import { AuthProvider } from "@contexts/authContext";
 import AppRoutes from "@/router/index";
+import { ToastProvider } from "@lib/hooks/use-toast";
 
 function Root() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    setTimeout(() => setIsLoading(false), 500); 
+    setTimeout(() => setIsLoading(false), 500);
   }, []);
 
   return isLoading ? (
@@ -20,16 +22,18 @@ function Root() {
       <Loader />
     </div>
   ) : (
-    <></>
+    <AuthProvider>
+      <BrowserRouter>
+        <ToastProvider>
+          <AppRoutes />
+        </ToastProvider>
+      </BrowserRouter>
+    </AuthProvider>
   );
 }
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <Root />
-    <BrowserRouter>
-    <AppRoutes>
-        </AppRoutes>
-    </BrowserRouter>
   </StrictMode>
 );

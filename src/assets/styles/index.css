@@ -1,5 +1,6 @@
 @import "tailwindcss";
-@import "@styles/global.css";
+@import "./global.css";
+@import './toast.css';
 
 /*fonts and colors to app*/
 @theme {
@@ -34,10 +35,10 @@
   --color-transparente: rgba(229, 229, 229, 0.7);
 }
 p {
-  font-size: 14px;
+  font-size: 16px;
 }
 @media (max-width: 640px) {
   p {
-    font-size: 12px;
+    font-size: 14px;
   }
 }
