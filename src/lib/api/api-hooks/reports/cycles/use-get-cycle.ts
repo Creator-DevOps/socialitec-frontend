@@ -4,7 +4,7 @@ import { useAuth } from "@contexts/authContext";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
-export const useGetReportCycle = (cycle_id: number|undefined,enabled: boolean = true) => {
+export const useGetReportCycle = (cycle_id: number,enabled: boolean = true) => {
   const { token } = useAuth();
 
   const [reportCycle, setReportCycle] = useState<ReportCycle | null>(null);
