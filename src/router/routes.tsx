@@ -27,6 +27,7 @@ import StudentTemplates from "@/pages/login/student/templates";
 import StudentInstitutios from "@pages/login/student/institutions"
 
 const routesConfig = [
+
   //Admin
   { path: "/admin/:id/profile", element: <AdminProfile /> },
   { path: "/admin/:id/coordinators", element: <AdminCoordinators /> },
@@ -49,6 +50,7 @@ const routesConfig = [
   { path: "/student/:id/reports/:cycleId", element: <StudentReports/> },
   { path: "/student/:id/reports/:cycleId/:itemId", element: <StudentReport/> },
   { path: "/student/:id/templates", element: <StudentTemplates /> },
+
 ];
 
 export default routesConfig;

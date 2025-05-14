@@ -25,6 +25,8 @@ export default defineConfig({
       '@router': path.resolve(__dirname, 'src/router'),
       '@base': path.resolve(__dirname, './'),
     }
+
   },
 
 });
+

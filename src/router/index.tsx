@@ -26,6 +26,7 @@ const AppRoutes = () => {
 
   return (
     <Routes>
+
       <Route path="/" element={<Navigate replace to="/landing-page" />} />
       <Route path="/landing-page" element={<LandingPage />} />
       <Route path="*" element={<R404 />} />
