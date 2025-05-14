@@ -2,7 +2,7 @@ import { useState, useCallback } from "react";
 import { useAuth } from "@/contexts/authContext";
 import { useToast } from "@/lib/hooks/use-toast";
 
-const API_URL = import.meta.env.VITE_API_URL; // ¡asegúrate de que sea HTTPS!
+const API_URL = import.meta.env.VITE_API_URL;
 
 export const useShowPreviewLetter = () => {
   const { token } = useAuth();
@@ -15,7 +15,6 @@ export const useShowPreviewLetter = () => {
       setLoading(true);
       setError(null);
 
-      // 1) Abrimos la ventana _antes_ de las operaciones asíncronas
       const win = window.open("", "_blank");
       if (!win) {
         toastError({ title: "Error", message: "Por favor permite ventanas emergentes." });
@@ -24,7 +23,6 @@ export const useShowPreviewLetter = () => {
       }
 
       try {
-        // 2) Obtener URL firmada
         const res1 = await fetch(
           `${API_URL}/letters/${document_id}/signed-url`,
           { headers: { Authorization: `Bearer ${token}` } }
@@ -32,29 +30,36 @@ export const useShowPreviewLetter = () => {
         if (!res1.ok) throw new Error(`Error ${res1.status}`);
         const { url: presigned } = (await res1.json()) as { url: string };
 
-        // 3) Descargar blob
         const res2 = await fetch(presigned);
         if (!res2.ok) throw new Error(`Error blob ${res2.status}`);
         const raw = await res2.blob();
 
-        // 4) Reconstruir MIME
         const ext = filePath.split(".").pop()?.toLowerCase() || "";
         const mimeByExt: Record<string, string> = {
           pdf:  "application/pdf",
           svg:  "image/svg+xml",
-          // … otros …
+          txt:  "text/plain",
+          xml:  "application/xml",
+          doc:  "application/msword",
+          docx: "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+          xls:  "application/vnd.ms-excel",
+          xlsx: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          csv:  "text/csv",
+          ppt:  "application/vnd.ms-powerpoint",
+          pptx: "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+          png:  "image/png",
+          jpg:  "image/jpeg",
+          jpeg: "image/jpeg",
+          gif:  "image/gif",
         };
         const mime = mimeByExt[ext] || raw.type || "application/octet-stream";
         const blob = new Blob([raw], { type: mime });
         const blobUrl = URL.createObjectURL(blob);
 
-        // 5) Redirigir la ventana que abrimos al blob
         win.location.href = blobUrl;
 
-        // 6) Limpiar después de un rato
         setTimeout(() => URL.revokeObjectURL(blobUrl), 60_000);
       } catch (e: any) {
-        // Si hay error, cerramos la ventana y mostramos mensaje real
         win.close();
         console.error("Error en vista previa:", e);
         toastError({ title: "Error en vista previa", message: e.message });
