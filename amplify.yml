@@ -3,7 +3,11 @@ frontend:
   phases:
     preBuild:
       commands:
-        - npm install -g bun
+        # instala Bun desde su script oficial
+        - curl -fsSL https://bun.sh/install | bash
+        # añade bun a tu PATH
+        - export PATH="$HOME/.bun/bin:$PATH"
+        # instala dependencias con bun
         - bun install
     build:
       commands:
@@ -15,18 +19,14 @@ frontend:
   cache:
     paths:
       - node_modules/**/*
-      - .bun/**/*
-
+      - .bun/**
 customHeaders:
   - pattern: '**/*'
     headers:
       - key: Cache-Control
         value: 'no-cache, no-store, must-revalidate'
-
-rewrites:
-  - source: '</^[^.]+$|\\.(?!(css|gif|ico|jpg|js|png|txt|svg|woff|ttf|map|json)$)([^.]+$)/>'
+redirects:
+  # regla catch-all para React Router
+  - source: "</^[^.]+$|\\.(?!(css|gif|ico|jpg|js|png|txt|svg|woff|ttf|map|json)$)([^.]+$)/>"
     target: /index.html
-    status: '200'
-  - source: /login/
-    target: /login
-    status: '301'
+    status: 200
