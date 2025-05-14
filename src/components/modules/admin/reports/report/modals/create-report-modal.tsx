@@ -32,12 +32,12 @@ const CreateReportModal: React.FC = () => {
     }>();
   // Obtenemos el request_id y consultamos
   const requestId = watch("request_id");
-  const { request: fetchedReq, loading: loadingReq, error: reqError } = useGetRequest(requestId);
+  const { request: fetchedReq, loading: loadingReq, error: reqError } = useGetRequest(requestId||0);
 
-  // Limpiar feedback de error cuando cambie el ID
-  useEffect(() => {
-    // podrias resetear algún mensaje o estado aquí si lo deseas
-  }, [requestId]);
+  // // Limpiar feedback de error cuando cambie el ID
+  // useEffect(() => {
+  //   // podrias resetear algún mensaje o estado aquí si lo deseas
+  // }, [requestId]);
 
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
     if (!user || !fetchedReq) return;
