@@ -5,7 +5,7 @@ import EditIcon from "@icons/edit.svg";
 import DeleteIcon from "@icons/delete.svg";
 import EyeIcon from "@icons/eye.svg";
 import DownloadIcon from "@icons/download.svg";
-import DocumentIcon from "@icons/menu/Reports.svg";
+import DocumentIcon from "@icons/menu/reports.svg";
 import DotsIcon from "@icons/miniMenu.svg";
 import { Report } from "@lib/api/models/report";
 import { useReports } from "./report-context";
