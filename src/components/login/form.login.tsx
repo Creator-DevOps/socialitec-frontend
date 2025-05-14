@@ -50,7 +50,7 @@ const FormLogin: React.FC = () => {
       <div className="w-full max-w-md mx-auto px-4">
         <div className="flex flex-row md:hidden items-center justify-between pb-10">
           <img src={TEC} alt="TecNM LOGO" className="w-30 h-30" />
-          <img src={ITL} alt="ITL LOGO" className="w-30 h-30" />
+          <img src={ITL} alt="ITL LOGO" className="w-25 h-25" />
         </div>
 
         <h2 className="text-2xl sm:text-3xl font-bold mb-6 text-primary">
