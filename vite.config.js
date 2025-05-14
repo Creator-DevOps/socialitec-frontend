@@ -5,6 +5,7 @@ import path from "path";
 
 export default defineConfig({
   base: './',
+
    build: {
     rollupOptions: {
       output: {
@@ -14,6 +15,7 @@ export default defineConfig({
       }
     },
     chunkSizeWarningLimit: 1000 // Adjust if needed
+
   },
   plugins: [react(), tailwindcss()],
   resolve: {
