@@ -2,7 +2,7 @@ import { ErrorMessage } from "@hookform/error-message";
 import get from "lodash/get";
 import { ReactNode } from "react";
 import { DeepMap, FieldError, FieldValues, Path, RegisterOptions, UseFormRegister } from "react-hook-form";
-import TextInput from "./text-Input"; // 👈 Importa tu TextInput
+import TextInput from "./text-Input"; 
 import classNames from "classnames";
 import { FieldErrors } from "react-hook-form";
 

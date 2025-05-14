@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
 
-interface User {
+export interface User {
   user_id: number;
   name: string;
   email: string;
@@ -34,8 +34,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const isAuthenticated = Boolean(user && token);
 
   useEffect(() => {
-    const storedUser = sessionStorage.getItem("user");
-    const storedToken = sessionStorage.getItem("token");
+    const storedUser = localStorage.getItem("user");
+    const storedToken = localStorage.getItem("token");
 
     if (storedUser && storedToken) {
       setUser(JSON.parse(storedUser));
@@ -43,19 +43,40 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     }
     setLoading(false);
   }, []);
+   useEffect(() => {
+    const handleStorage = (e: StorageEvent) => {
+      if (e.key === "user") {
+        if (e.newValue) {
+          setUser(JSON.parse(e.newValue));
+        } else {
+          setUser(null);
+        }
+      }
+      if (e.key === "token") {
+        if (e.newValue) {
+          setToken(e.newValue);
+        } else {
+          setToken(null);
+        }
+      }
+    };
+
+    window.addEventListener("storage", handleStorage);
+    return () => window.removeEventListener("storage", handleStorage);
+  }, []);
 
   const login = (userData: User, tokenData: string) => {
     setUser(userData);
     setToken(tokenData);
-    sessionStorage.setItem("user", JSON.stringify(userData)); 
-    sessionStorage.setItem("token", tokenData);
+    localStorage.setItem("user", JSON.stringify(userData)); 
+    localStorage.setItem("token", tokenData);
   };
 
   const logout = () => {
     setUser(null);
     setToken(null);
-    sessionStorage.removeItem("user"); 
-    sessionStorage.removeItem("token");
+    localStorage.removeItem("user"); 
+    localStorage.removeItem("token");
   };
 
   return (

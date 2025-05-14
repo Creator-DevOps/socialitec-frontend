@@ -1,5 +1,5 @@
 import { useState } from "react";
-import ChangePasswordModal from "../modals/change-password-admin-modal";
+import ChangePasswordModal from "../modals/change-password-student-modal";
 import { ClassNames } from "@emotion/react";
 import { useAuth } from "@/contexts/authContext";
 const AdminProfile = () => {
@@ -42,7 +42,7 @@ const AdminProfile = () => {
             <p>
               <strong>Email: </strong>
             </p>
-            <span className="underline text-gray-200">
+            <span className="underline text-gray-200 hover:text-white">
               {user?.email}
             </span>
           </div>

@@ -7,7 +7,7 @@ interface CardBodyProps {
 
 export const CardBody: React.FC<CardBodyProps> = ({ children, className = "" }) => {
   return (
-    <div className="flex-1 overflow-y-auto px-4 md:px-8 py-6 scrollable-container">
+    <div className={`flex-1 overflow-y-auto px-4 md:px-8  scrollable-container ${className}`}>
       {children}
     </div>
   );

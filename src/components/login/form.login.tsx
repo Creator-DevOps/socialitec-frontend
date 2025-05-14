@@ -7,6 +7,7 @@ import Loader from "../ui-componets/load/Loader";
 
 import TEC from "@png/TecVertical.svg";
 import ITL from "@png/itl.svg";
+import { useToast } from "@/lib/hooks/use-toast";
 
 export interface FormData {
   email: string;
@@ -17,6 +18,7 @@ const FormLogin: React.FC = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { loginUser, loading, error } = useLoginUser();
+  const { toastSuccess, toastError, toastWarning } = useToast();
 
   const {
     register,
@@ -35,10 +37,10 @@ const FormLogin: React.FC = () => {
       } else if (user.user_type === 2) {
         navigate(`/student/${user.user_id}/profile`, { replace: true });
       } else {
-        console.error("Tipo de usuario desconocido");
+        toastError({ id: 25, title: 'Error', message: 'Tipo de usuario desconocido' });
       }
     } catch (err) {
-      console.error("Error en login:", err);
+      toastError({ id: 26, title: 'Error', message: 'Error al iniciar sessión' });
     }
   };
 
@@ -69,7 +71,7 @@ const FormLogin: React.FC = () => {
               className="input"
             />
             {errors.email && (
-              <p className="text-red-500 text-xs mt-1">
+              <p className="text-red-500 !text-xs mt-1">
                 {errors.email.message}
               </p>
             )}
@@ -88,7 +90,7 @@ const FormLogin: React.FC = () => {
               className="input"
             />
             {errors.password && (
-              <p className="text-red-500 text-xs mt-1">
+              <p className="text-red-500 !text-xs mt-1">
                 {errors.password.message}
               </p>
             )}
@@ -97,7 +99,7 @@ const FormLogin: React.FC = () => {
           <button type="submit" className="create w-60" disabled={loading}>
             {t("LOGIN.FORM.LOGIN")}
           </button>
-          {error && <p className="text-red-500 mt-2">{error}</p>}
+          {error && <p className="text-red-500 mt-2 !text-sm">{error}</p>}
         </form>
 
         <div className="mt-4 text-sm text-left">

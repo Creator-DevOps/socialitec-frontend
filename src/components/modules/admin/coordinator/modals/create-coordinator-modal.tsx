@@ -35,7 +35,7 @@ const CreateCoordinatorModal: React.FC = () => {
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col space-y-4">
           <FormInput name="name" label="Nombre" placeholder="Nombre del coordinador"
             register={register} errors={errors} rules={{ required: 'Nombre es obligatorio' }} />
-          <FormInput name="email" label="Correo electrónico" placeholder="correo@ejemplo.com"
+          <FormInput name="email" label="Correo electrónico" placeholder="correo@leon.tecnm.mx"
             register={register} errors={errors}
             rules={{ required: 'Correo es obligatorio', pattern: { value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, message: 'Correo inválido' } }} />
           <FormInput name="departament" label="Departamento" placeholder="Departamento"

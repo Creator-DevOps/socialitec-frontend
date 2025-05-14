@@ -59,7 +59,7 @@ const AdminMenu = () => {
           <Option to={`/admin/${userId}/templates`} label="Plantillas">
             <img src={Templates} alt="Plantillas_Icon" />
           </Option>
-          <Option to={`/admin/${userId}/reports`} label="Reportes">
+          <Option to={`/admin/${userId}/cycles`} label="Reportes">
             <img src={Reports} alt="Reportes_Icon" />
           </Option>
           <Option

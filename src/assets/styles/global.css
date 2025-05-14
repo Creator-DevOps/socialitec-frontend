@@ -38,8 +38,9 @@
   .boton1:hover {
     background-color: var(--color-secondary);
   }
-  .input {
-    @apply text-sm w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#0E4AB4];
+
+ .input {
+    @apply text-sm w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-0 focus:border-2 focus:border-[#0E4AB4];
  }
  
   /* Scrollbar personalizado */
@@ -84,13 +85,13 @@
 
   /*Botones*/
   .cancel{
-    @apply  text-center w-25 sm:w-25 md:w-30 text-xs sm:text-sm font-semibold text-black h-[40px] rounded-none px-5 cursor-pointer drop-shadow-sm tracking-[0.05rem] bg-gray-100 hover:bg-gray-50;
+    @apply  text-center w-26 md:w-35 text-xs sm:text-sm font-semibold text-black h-[40px] rounded-none px-5 cursor-pointer drop-shadow-sm tracking-[0.05rem] bg-gray-100 hover:bg-gray-50;
   }
   .delete{
-    @apply   text-center w-25 sm:w-25 md:w-30 text-xs sm:text-sm font-semibold text-white h-[40px] rounded-none px-5 cursor-pointer drop-shadow-sm tracking-[0.05rem] hover:bg-[#e40004ab] bg-[#E40004] ;
+    @apply   text-center w-26 md:w-35 text-xs sm:text-sm font-semibold text-white h-[40px] rounded-none px-5 cursor-pointer drop-shadow-sm tracking-[0.05rem] hover:bg-[#e40004ab] bg-[#E40004] ;
   }
   .create{
-    @apply   text-center w-25 sm:w-25 md:w-30 text-xs sm:text-sm font-semibold text-white h-[40px] rounded-none px-5 cursor-pointer drop-shadow-sm tracking-[0.05rem] hover:bg-[#0E4AB4] bg-[#002855] ;
+    @apply   text-center w-26 md:w-35 text-xs sm:text-sm font-semibold text-white h-[40px] rounded-none px-5 cursor-pointer drop-shadow-sm tracking-[0.05rem] hover:bg-[#0E4AB4] bg-[#002855] ;
   }
   .content-user-config {
     @apply grid md:flex sm:grid sm:grid-cols-1 grid-cols-1 md:justify-between border-b pb-2 w-full items-center justify-center;
@@ -98,7 +99,7 @@
   } 
   /*Tabla*/
   .table{
-    @apply h-full w-full text-xs md:text-sm text-left border-separate border-spacing-0.5;
+    @apply w-full text-xs md:text-sm text-left border-separate border-spacing-y-2 border-spacing-x-3;
   }
   .thead{
     @apply text-sm md:text-base font-bold border-b-1 border-[#0E4AB4] h-8;

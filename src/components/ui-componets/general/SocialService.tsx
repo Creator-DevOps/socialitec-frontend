@@ -28,6 +28,22 @@ const AboutUs = () => {
           </section>
           <section className="flex flex-col gap-2">
             <h2 className="font-bold text-xl sm:text-2xl text-primary text-center">
+             Requisitos
+            </h2>
+            <ul className="list-disc text-left px-10">
+              <li>
+              Haber aprobado al menos el 70% de los créditos del plan de estudios.
+              </li>
+              <li>
+              Estar inscrito al momento de registrar el Servicio Social.
+              </li>
+              <li>
+              Contar con un correo institucional.
+              </li>
+            </ul>
+          </section>
+          <section className="flex flex-col gap-2">
+            <h2 className="font-bold text-xl sm:text-2xl text-primary text-center">
               Duración y créditos
             </h2>
             <p>

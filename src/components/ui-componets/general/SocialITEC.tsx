@@ -29,18 +29,14 @@ const AboutRAG = () => {
               desarrollo de soluciones innovadoras.
             </p>
           </section>
-          <section className="flex flex-col gap-2">
+          {/* <section className="flex flex-col gap-2">
             <h2 className="font-bold text-xl sm:text-2xl text-primary text-center">
               Nuestro Equipo
             </h2>
             <ul>
-              <li>Carlos Eduardo</li>
-              <li>Carlos Eduardo</li>
-              <li>Carlos Eduardo</li>
-              <li>Carlos Eduardo</li>
-              <li>Carlos Eduardo</li>
+              <li>Bustamante Servin Carlos Eduardo</li>
             </ul>
-          </section>
+          </section> */}
 
           <section className="flex flex-col gap-2">
             <h2 className="font-bold text-xl sm:text-2xl text-primary text-center">

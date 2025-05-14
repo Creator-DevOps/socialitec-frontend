@@ -6,10 +6,8 @@ import UserIcon from "@images/icons/user.svg";
 import { useNavigate } from "react-router-dom";
 import Link from "@router/linkTo";
 import UserMenu from "@/components/layouts/modals/userMenu";
-import users from "@/components/layouts/models-test/user";
+import {useAuth } from "@/contexts/authContext";
 import LogoutConfirmationModal from "@/components/layouts/modals/logout-modal";
-
-import LanguageToggle from "@components/ui-componets/buttons/lenguageToggle";
 type HeaderProps = {
   sidebarOpen: boolean;
   onSidebarOpen: () => void;
@@ -18,12 +16,10 @@ type HeaderProps = {
 const Header: React.FC<HeaderProps> = ({ sidebarOpen, onSidebarOpen }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const user = users[0];
+  const {user} = useAuth();
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
   const [isConfigModalOpen, setIsConfigModalOpen] = useState(false);
-
-
   const toggleUserMenu = () => setIsUserMenuOpen((prev) => !prev);
   const closeUserMenu = () => setIsUserMenuOpen(false);
 

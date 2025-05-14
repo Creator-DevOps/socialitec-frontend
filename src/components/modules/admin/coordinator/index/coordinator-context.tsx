@@ -14,7 +14,7 @@ interface CreateInput {
   confirmPassword: string;
 }
 interface UpdateInput {
-  name: string;
+  name?: string;
   email?: string;
   departament?: string;
   password?: string;
@@ -76,7 +76,7 @@ export const CoordinatorsProvider = ({ children }: { children: ReactNode }) => {
       return;
     }
     try {
-      await createCoordinator({ name: data.name, email: data.email, departament: data.departament, password: data.password });
+      await createCoordinator({ name: data.name, email: data.email.toLowerCase(), departament: data.departament, password: data.password });
       await refetch();
       toastSuccess({ id: 2, title: '¡Éxito!', message: 'Coordinador creado correctamente' });
       closeCreate();
@@ -96,8 +96,8 @@ export const CoordinatorsProvider = ({ children }: { children: ReactNode }) => {
     if (!selected) return;
     try {
       await updateCoordinator(selected.user_id, {
-        name: data.name,
-        ...(data.email !== undefined && { email: data.email }),
+        ...(data.name !== undefined && { name: data.name}),
+        ...(data.email !== undefined && { email: data.email.toLowerCase() }),
         ...(data.departament !== undefined && { departament: data.departament }),
         ...(data.password && { password: data.password }),
       });

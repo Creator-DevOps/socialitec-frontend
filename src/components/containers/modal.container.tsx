@@ -32,7 +32,7 @@ const modalContainer = ({
   return (
     <div
       className={classNames(
-        "fixed inset-0 z-10 flex items-center justify-center overflow-auto",
+        "fixed inset-0 z-10 flex items-center justify-center overflow-auto scrollable-container",
         "bg-transparente" 
       )}
       onClick={handleBackdropClick}

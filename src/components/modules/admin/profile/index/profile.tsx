@@ -47,7 +47,7 @@ const AdminProfile = () => {
             <p>
               <strong>Email: </strong>
             </p>
-            <span className="underline text-gray-200">{user?.email}</span>
+            <span className="underline text-gray-200 hover:text-white">{user?.email}</span>
           </div>
         </div>
       </div>

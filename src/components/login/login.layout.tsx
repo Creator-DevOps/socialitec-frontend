@@ -1,12 +1,10 @@
 import React, { useState } from "react";
 import Branding from "./branding";
-import FormLogin from "./form.login"; // ✅ Import correcto
+import FormLogin from "./form.login"; 
 import Header from "./header";
 import Footer from "./footer";
 
 import { useTranslation } from "react-i18next";
-
-// Actualización de FormData para reflejar el número de control
 interface FormData {
   numeroControl: string;
   password: string;
@@ -14,7 +12,6 @@ interface FormData {
 
 const LoginLayout: React.FC = () => {
   const { t } = useTranslation();
-  const [isSignUpOpen, setIsSignUpOpen] = useState<boolean>(false);
 
   return (
     <div className="min-h-screen flex flex-col">
