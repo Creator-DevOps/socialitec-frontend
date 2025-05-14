@@ -1,32 +1,31 @@
 version: 1
 frontend:
   phases:
+    # Instala dependencias con npm
     preBuild:
       commands:
-        # instala Bun desde su script oficial
-        - curl -fsSL https://bun.sh/install | bash
-        # añade bun a tu PATH
-        - export PATH="$HOME/.bun/bin:$PATH"
-        # instala dependencias con bun
-        - bun install
+        - npm ci
+    # Construye tu app Vite + React
     build:
       commands:
-        - bun run build
+        - npm run build
   artifacts:
+    # Vite genera los archivos de salida en "dist"
     baseDirectory: dist
     files:
       - '**/*'
   cache:
+    # Cachea node_modules para acelerar futuros builds
     paths:
       - node_modules/**/*
-      - .bun/**
 customHeaders:
   - pattern: '**/*'
     headers:
       - key: Cache-Control
         value: 'no-cache, no-store, must-revalidate'
 redirects:
-  # regla catch-all para React Router
-  - source: "</^[^.]+$|\\.(?!(css|gif|ico|jpg|js|png|txt|svg|woff|ttf|map|json)$)([^.]+$)/>"
-    target: /index.html
+  # Rewrite catch-all para React Router
+  - source: '/<*>'
+    target: '/index.html'
     status: 200
+
