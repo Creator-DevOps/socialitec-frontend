@@ -6,8 +6,14 @@ import path from "path";
 export default defineConfig({
   base: './',
    build: {
-    outDir: 'dist',
-    emptyOutDir: true,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom'],
+        }
+      }
+    },
+    chunkSizeWarningLimit: 1000 // Adjust if needed
   },
   plugins: [react(), tailwindcss()],
   resolve: {
