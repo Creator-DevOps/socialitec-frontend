@@ -14,24 +14,42 @@ const AboutRAG = () => {
         <Header />
       </div>
 
-      <div className="flex flex-col flex-1 items-center y-25 px-6 ">
-        <h1 className="font-bold text-xl sm:text-6xl text-primary text-center">
-          SocialITEC
-        </h1>
-        <img src={Icon} alt="Icon" className="w-20 sm:w-50" />
-        <span className="text-sm sm:text-base text-justify min-w-1/2 max-w-[95%] sm:max-w-1/2 leading-[1.5]">
-          RAG (Retrieval‑Augmented Generation) es la tecnología que combina la
-          búsqueda avanzada de información con modelos de lenguaje de última
-          generación. En RAGBridge, aprovechamos esta metodología para entregar
-          respuestas precisas y contextualizadas: primero recuperamos contenido
-          relevante desde tu repositorio y luego generamos texto enriquecido que
-          mejora la interacción con tus clientes. Esto se traduce en respuestas
-          más acertadas, actualizadas y alineadas con la voz de tu marca,
-          potenciando la eficacia de tus chatbots y asistentes virtuales.
-        </span>
-        <Button title="Guardar" />
-        <button className="cancel my-4">Cancelar</button>
-        <button className="delete my-4">Eliminar</button>
+      <div className="flex flex-col flex-1 items-center py-30 px-6 justify-center ">
+        <div className="flex flex-col flex-1 text-justify justify-center items-center w-full md:w-[70%] gap-10 ">
+          <section className="flex flex-col gap-2 items-center gap-4">
+            <h1 className="font-bold text-xl md:text-3xl text-primary text-center">
+              SocialITEC
+            </h1>
+            <img src={Icon} alt="Icon" className="w-20 md:w-40" />
+            <p>
+              SocialITEC es una plataforma desarrollada por estudiantes del
+              Instituto Tecnológico de León con el propósito de simplificar el
+              proceso de gestión del servicio social. Nuestro equipo está
+              conformado por jóvenes apasionados por la tecnología y el
+              desarrollo de soluciones innovadoras.
+            </p>
+          </section>
+          {/* <section className="flex flex-col gap-2">
+            <h2 className="font-bold text-xl sm:text-2xl text-primary text-center">
+              Nuestro Equipo
+            </h2>
+            <ul>
+              <li>Bustamante Servin Carlos Eduardo</li>
+            </ul>
+          </section> */}
+
+          <section className="flex flex-col gap-2">
+            <h2 className="font-bold text-xl sm:text-2xl text-primary text-center">
+              Nuestra Misión
+            </h2>
+            <p>
+              En SocialITEC, nuestra misión es brindar a los estudiantes y
+              encargados del servicio social herramientas digitales que
+              optimicen y simplifiquen los procesos administrativos, reduciendo
+              tiempos y errores, y aumentando la satisfacción de los usuarios.
+            </p>
+          </section>
+        </div>
       </div>
       <Footer />
     </div>

@@ -66,7 +66,8 @@ export const IconButton: FC<IconButtonProps> = ({
         },
       }}
     >
-      {button}
+      <span> {button}</span>
+     
     </Tooltip>
   );
 };

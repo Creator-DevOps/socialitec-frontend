@@ -6,10 +6,8 @@ import UserIcon from "@images/icons/user.svg";
 import { useNavigate } from "react-router-dom";
 import Link from "@router/linkTo";
 import UserMenu from "@/components/layouts/modals/userMenu";
-import users from "@/components/layouts/models-test/user";
-import LogoutConfirmationModal from "@/components/layouts/modals/logoutConfirmation";
-
-import LanguageToggle from "@components/ui-componets/buttons/lenguageToggle";
+import {useAuth } from "@/contexts/authContext";
+import LogoutConfirmationModal from "@/components/layouts/modals/logout-modal";
 type HeaderProps = {
   sidebarOpen: boolean;
   onSidebarOpen: () => void;
@@ -18,12 +16,10 @@ type HeaderProps = {
 const Header: React.FC<HeaderProps> = ({ sidebarOpen, onSidebarOpen }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const user = users[0];
+  const {user} = useAuth();
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
   const [isConfigModalOpen, setIsConfigModalOpen] = useState(false);
-
-
   const toggleUserMenu = () => setIsUserMenuOpen((prev) => !prev);
   const closeUserMenu = () => setIsUserMenuOpen(false);
 
@@ -58,8 +54,8 @@ const Header: React.FC<HeaderProps> = ({ sidebarOpen, onSidebarOpen }) => {
         </div>
       )}
 
-      <div className="hidden md:flex flex-1 text-center">
-        <nav className="flex-1 flex justify-center space-x-10">
+      <div className="flex flex-1 text-center">
+        <nav className="flex-1 flex justify-center gap-4 md:gap-10">
           <Link
             to="/tecnm"
             className="hover:underline text-secondary text-sm md:text-sm"
@@ -67,7 +63,7 @@ const Header: React.FC<HeaderProps> = ({ sidebarOpen, onSidebarOpen }) => {
             {t("LOGIN.HEADER.ABOUTTEC")}
           </Link>
           <Link
-            to="social-service"
+            to="/social-service"
             className="hover:underline text-secondary text-sm md:text-sm"
           >
             {t("LOGIN.HEADER.SERVICE")}
@@ -83,7 +79,7 @@ const Header: React.FC<HeaderProps> = ({ sidebarOpen, onSidebarOpen }) => {
 
       <div className="relative">
         <div className="flex flex-row">
-        <LanguageToggle />
+        {/* <LanguageToggle /> */}
           <IconButton
             onClick={toggleUserMenu}
             tooltip={t("LAYOUT.HEADER.USER_ICON")}
@@ -104,7 +100,6 @@ const Header: React.FC<HeaderProps> = ({ sidebarOpen, onSidebarOpen }) => {
       <LogoutConfirmationModal
         visible={isLogoutModalOpen}
         onClose={handleCloseLogoutModal}
-        onConfirm={handleConfirmLogout}
       />
     </header>
   );

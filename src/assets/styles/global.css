@@ -16,7 +16,7 @@
     --color-red: #ED1C24;
     --color-red-light: #FF242B;
     --color-yellow: #FFDD00;
-    --color-red-light: #FFE033;
+    --color-yellow-light: #FFE033;
     
 
     /* Fuente y estilos globales */
@@ -38,8 +38,9 @@
   .boton1:hover {
     background-color: var(--color-secondary);
   }
-  .input {
-    @apply text-sm w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#0E4AB4];
+
+ .input {
+    @apply text-sm w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-0 focus:border-2 focus:border-[#0E4AB4];
  }
  
   /* Scrollbar personalizado */
@@ -84,16 +85,33 @@
 
   /*Botones*/
   .cancel{
-    @apply  text-center w-25 sm:w-25 md:w-30 text-xs sm:text-sm font-semibold text-black h-[40px] rounded-none px-5 cursor-pointer drop-shadow-sm tracking-[0.05rem] bg-gray-100 hover:bg-gray-50;
+    @apply  text-center w-26 md:w-35 text-xs sm:text-sm font-semibold text-black h-[40px] rounded-none px-5 cursor-pointer drop-shadow-sm tracking-[0.05rem] bg-gray-100 hover:bg-gray-50;
   }
   .delete{
-    @apply   text-center w-25 sm:w-25 md:w-30 text-xs sm:text-sm font-semibold text-white h-[40px] rounded-none px-5 cursor-pointer drop-shadow-sm tracking-[0.05rem] hover:bg-[#e40004ab] bg-[#E40004] ;
+    @apply   text-center w-26 md:w-35 text-xs sm:text-sm font-semibold text-white h-[40px] rounded-none px-5 cursor-pointer drop-shadow-sm tracking-[0.05rem] hover:bg-[#e40004ab] bg-[#E40004] ;
   }
-  .send{
-    @apply   text-center w-25 sm:w-25 md:w-30 text-xs sm:text-sm font-semibold text-white h-[40px] rounded-none px-5 cursor-pointer drop-shadow-sm tracking-[0.05rem] hover:bg-[#0F3C84] bg-[#002855] ;
+  .create{
+    @apply   text-center w-26 md:w-35 text-xs sm:text-sm font-semibold text-white h-[40px] rounded-none px-5 cursor-pointer drop-shadow-sm tracking-[0.05rem] hover:bg-[#0E4AB4] bg-[#002855] ;
   }
   .content-user-config {
     @apply grid md:flex sm:grid sm:grid-cols-1 grid-cols-1 md:justify-between border-b pb-2 w-full items-center justify-center;
     border-bottom-color: var(--color-primary);
   } 
+  /*Tabla*/
+  .table{
+    @apply w-full text-xs md:text-sm text-left border-separate border-spacing-y-2 border-spacing-x-3;
+  }
+  .thead{
+    @apply text-sm md:text-base font-bold border-b-1 border-[#0E4AB4] h-8;
+  }
+
+  .tbody{
+    @apply h-full;
+  }
+
+  /*Sidebar button*/
+  .sidebarbutton{
+    @apply flex flex-row items-center gap-3 px-4 py-2 text-sm transition-all duration-200 ease-in-out transform will-change-transform hover:bg-[#f0f0f0] hover:scale-[1.05]  focus:outline-none focus:ring-0
+  }
+
 }

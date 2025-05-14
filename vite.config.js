@@ -10,6 +10,7 @@ export default defineConfig({
     alias: {
       '@': path.resolve(__dirname, 'src'),
       '@components': path.resolve(__dirname, 'src/components'),
+      '@contexts': path.resolve(__dirname, 'src/contexts'),
       '@layouts': path.resolve(__dirname, 'src/components/layouts'),
       '@assets': path.resolve(__dirname, 'src/assets'),
       '@styles': path.resolve(__dirname, 'src/assets/styles'),
@@ -24,36 +25,8 @@ export default defineConfig({
       '@router': path.resolve(__dirname, 'src/router'),
       '@base': path.resolve(__dirname, './'),
     }
+
   },
-  build: {
-    outDir: 'dist',
-    emptyOutDir: true,
-    rollupOptions: {
-      output: {
-        assetFileNames: 'assets/[name]-[hash][extname]',
-        entryFileNames: 'assets/[name]-[hash].js',
-        chunkFileNames: 'assets/[name]-[hash].js',
-      }
-    }
-  },
-  server: {
-    historyApiFallback: {
-      disableDotRule: true,
-      rewrites: [
-        { from: /\/$/, to: '/index.html' },
-        { from: /./, to: '/index.html' }
-      ]
-    }
-  },
-  preview: {
-    port: 4173,
-    strictPort: true,
-    historyApiFallback: {
-      disableDotRule: true,
-      rewrites: [
-        { from: /\/$/, to: '/index.html' },
-        { from: /./, to: '/index.html' }
-      ]
-    }
-  }
+
 });
+

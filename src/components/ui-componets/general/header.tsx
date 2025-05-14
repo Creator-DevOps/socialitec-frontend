@@ -5,8 +5,8 @@ import LanguageToggle from "@components/ui-componets/buttons/lenguageToggle";
 import { IconButton } from "../buttons/iconButton";
 import { useNavigate } from "react-router-dom";
 import Icon from "@icons/iconG.svg";
-import TecNM from "@png/tec.png";
-import ITL from "@png/itl.png";
+import TecNM from "@png/tec.svg";
+import ITL from "@png/itl.svg";
 
 const Header: React.FC = () => {
   const { t } = useTranslation();
@@ -21,7 +21,7 @@ const Header: React.FC = () => {
         <img src={TecNM} alt="TecNM" className="h-10 md:h-15" />
         <img src={ITL} alt="ITL" className=" h-10 md:h-15" />
       </div>
-      <LanguageToggle />
+      {/* <LanguageToggle /> */}
     </header>
   );
 };

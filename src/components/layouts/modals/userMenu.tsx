@@ -1,20 +1,14 @@
 import React, { useRef, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-interface User {
-  id:string;
-  role?:string;
-  name:string;
-  email:string;
-}
+import { User } from "@/contexts/authContext";
 
 interface UserMenuProps {
   user: User;
   onLogout: () => void;
   onClose: () => void;
-
 }
 
-const userMenu: React.FC<UserMenuProps> = ({ user, onLogout, onClose}) => {
+const userMenu: React.FC<UserMenuProps> = ({ user, onLogout, onClose }) => {
   const { t } = useTranslation();
   const menuRef = useRef<HTMLDivElement>(null);
 
@@ -29,8 +23,19 @@ const userMenu: React.FC<UserMenuProps> = ({ user, onLogout, onClose}) => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [onClose]);
 
-
-
+  const getType = (type?: number) => {
+    switch (type) {
+      case 0:
+        return "Administrador";
+      case 1:
+        return "Coordinador";
+      case 2:
+        return "Estudiante";
+      default:
+        return "Desconocido";
+    }
+  };
+  const typeUser = getType(user?.user_type);
   return (
     <div
       ref={menuRef}
@@ -40,8 +45,8 @@ const userMenu: React.FC<UserMenuProps> = ({ user, onLogout, onClose}) => {
       {/* Información de Usuario */}
       <div className="border-b border-gray-100 p-2">
         <p className="font-semibold text-gray-800">{user.name}</p>
-        {user.role && (
-          <p className="text-xs sm:text-sm text-gray-500">{user.role}</p>
+        {user.user_type !== undefined && user.user_type !== null && (
+          <p className="text-xs sm:text-sm text-gray-500">{typeUser}</p>
         )}
       </div>
       <ul className="py-1">
