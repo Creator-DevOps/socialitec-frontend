@@ -14,6 +14,7 @@ interface CreateInput {
   acceptance_status: number;
   progress_status: number;
   completed_hours: number;
+  coordinator_id?:number;
   feedback: string;
   cycle_id:number;
 }
@@ -21,6 +22,7 @@ interface UpdateInput {
   student_id?: number;
   program_id?: number;
   cycle_id?:number;
+  coordinator_id?:number;
   acceptance_status?: number;
   progress_status?: number;
   completed_hours?: number;

@@ -10,6 +10,7 @@ interface FormValues {
   request_id?: number;
   student_id?: number;
   institution_id: number;
+  coordinator_id?:number;
   program_id: number;
   acceptance_status: number;
   progress_status: number;
@@ -108,7 +109,7 @@ const UpdateRequestModal: React.FC = () => {
       });
       return;
     }
-    await handleUpdate({ ...data, coordinator_id: user?.user_id || 0 });
+    await handleUpdate({ ...data });
     closeEdit();
   };
   const institutionName = selected?.institution.institution_name;

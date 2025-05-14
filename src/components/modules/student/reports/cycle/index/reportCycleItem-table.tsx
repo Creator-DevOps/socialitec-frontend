@@ -37,7 +37,7 @@ export const ReportCycleItemsContent: React.FC<Props> = ({ children }) => {
 
   const { reportCycle, loading: load } = useGetReportCycle(Number(cycleId));
 
-  const { request,loading:load2 } = useGetRequestUser(user?.user_id);
+  const { request,loading:load2 } = useGetRequestUser(user?.user_id||0);
 
   return (
     <Card>
