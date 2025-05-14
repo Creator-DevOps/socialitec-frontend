@@ -12,7 +12,7 @@ export const useUpdateRequest = () => {
   const updateRequest = async (request_id: number, updates: Partial<{
     student_id: number;
     program_id: number;
-    coordinator_id: number;
+    coordinator_id?: number;
     acceptance_status: number;
     progress_status: number;
     completed_hours: number;

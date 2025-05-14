@@ -14,6 +14,7 @@ export const useUpdateCoordinator = () => {
     email: string;
     password: string;
     departament: string;
+
   }>) => {
     try {
       setLoading(true);

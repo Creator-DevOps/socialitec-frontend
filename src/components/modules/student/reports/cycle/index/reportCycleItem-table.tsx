@@ -35,7 +35,7 @@ export const ReportCycleItemsContent: React.FC<Props> = ({ children }) => {
   const userId = user?.user_id || 0;
   const { cycleId } = useParams<{ cycleId: string }>();
 
-  const { reportCycle, loading: load } = useGetReportCycle(Number(cycleId));
+  const { reportCycle, loading: load } = useGetReportCycle(Number(cycleId)||0);
 
   const { request,loading:load2 } = useGetRequestUser(user?.user_id||0);
 

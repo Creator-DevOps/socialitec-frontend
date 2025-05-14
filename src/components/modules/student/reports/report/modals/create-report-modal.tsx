@@ -43,8 +43,8 @@ const CreateReportModal: React.FC = () => {
   }>();
 
   const { reportCycleItem: asignacion } = useGetReportCycleItem(
-    Number(cycleId),
-    Number(itemId)
+    Number(cycleId)||0,
+    Number(itemId)||0
   );
   const requestId = watch("request_id");
 
