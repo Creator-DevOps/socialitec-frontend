@@ -5,6 +5,10 @@ import path from "path";
 
 export default defineConfig({
   base: './',
+   build: {
+    outDir: 'dist',
+    emptyOutDir: true,
+  },
   plugins: [react(), tailwindcss()],
   resolve: {
     alias: {
