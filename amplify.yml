@@ -3,28 +3,18 @@ frontend:
   phases:
     preBuild:
       commands:
-        # Limpia e instala deps con npm
         - npm ci
     build:
       commands:
-        # Genera tu build de Vite
         - npm run build
   artifacts:
-    # Vite deja los archivos estáticos en "dist"
     baseDirectory: dist
     files:
       - '**/*'
   cache:
-    # Cachea node_modules para acelerar futuros builds
     paths:
       - node_modules/**/*
-customHeaders:
-  - pattern: '**/*'
-    headers:
-      - key: Cache-Control
-        value: 'no-cache, no-store, must-revalidate'
 redirects:
-  # Catch-all para que React Router maneje rutas internas
   - source: '/<*>'
     target: '/index.html'
     status: 200
