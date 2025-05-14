@@ -5,7 +5,7 @@ import path from "path";
 
 export default defineConfig({
   base: './',
-  build: {
+   build: {
     outDir: 'dist',
     emptyOutDir: true,
   },
