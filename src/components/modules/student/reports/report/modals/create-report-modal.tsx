@@ -25,7 +25,7 @@ interface FormValues {
 const CreateReportModal: React.FC = () => {
   const { isCreateOpen, closeCreate, handleCreate } = useReports();
   const { user } = useAuth();
-  const { request } = useGetRequestUser(user?.user_id);
+  const { request } = useGetRequestUser(user?.user_id||0);
   
   const { toastSuccess, toastError, toastWarning } = useToast();
   const {
@@ -43,8 +43,8 @@ const CreateReportModal: React.FC = () => {
   }>();
 
   const { reportCycleItem: asignacion } = useGetReportCycleItem(
-    Number(cycleId),
-    Number(itemId)
+    Number(cycleId)||0,
+    Number(itemId)||0
   );
   const requestId = watch("request_id");
 
