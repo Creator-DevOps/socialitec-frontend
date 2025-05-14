@@ -25,7 +25,7 @@ interface FormValues {
 const CreateReportModal: React.FC = () => {
   const { isCreateOpen, closeCreate, handleCreate } = useReports();
   const { user } = useAuth();
-  const { request } = useGetRequestUser(user?.user_id);
+  const { request } = useGetRequestUser(user?.user_id||0);
   
   const { toastSuccess, toastError, toastWarning } = useToast();
   const {
