@@ -16,19 +16,19 @@ const Header = () => {
       <div className="flex flex-row items-center gap-4">
           <Link
           to="/tecnm"
-          className="!text-white hover:underline text-secondary text-[12px] md:text-sm"
+          className="!text-white hover:underline text-secondary text-[10px] md:text-sm"
         >
           {t("LOGIN.HEADER.ABOUTTEC")}
         </Link>
         <Link
           to="/social-service"
-          className="!text-white hover:underline text-secondary text-[12px] md:text-sm"
+          className="!text-white hover:underline text-secondary text-[10px] md:text-sm"
         >
           {t("LOGIN.HEADER.SERVICE")}
         </Link>
         <Link
           to="/socialitec"
-          className="!text-white hover:underline text-secondary text-[12px] md:text-sm"
+          className="!text-white hover:underline text-secondary text-[10px] md:text-sm"
         >
           {t("LOGIN.HEADER.SOCIALITEC")}
         </Link>
