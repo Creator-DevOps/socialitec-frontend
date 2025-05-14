@@ -58,19 +58,19 @@ const Header: React.FC<HeaderProps> = ({ sidebarOpen, onSidebarOpen }) => {
         <nav className="flex-1 flex justify-center gap-4 md:gap-10">
           <Link
             to="/tecnm"
-            className="hover:underline text-secondary text-sm md:text-sm"
+            className="!text-white hover:underline text-secondary text-sm md:text-sm"
           >
             {t("LOGIN.HEADER.ABOUTTEC")}
           </Link>
           <Link
             to="/social-service"
-            className="hover:underline text-secondary text-sm md:text-sm"
+            className="!text-white hover:underline text-secondary text-sm md:text-sm"
           >
             {t("LOGIN.HEADER.SERVICE")}
           </Link>
           <Link
             to="/socialitec"
-            className="hover:underline text-secondary text-sm md:text-sm"
+            className="!text-white hover:underline text-secondary text-sm md:text-sm"
           >
             {t("LOGIN.HEADER.SOCIALITEC")}
           </Link>

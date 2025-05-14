@@ -1,9 +1,11 @@
 import TecNMICON from "@images/png/socialitec.svg";
 import TecNMICONWHITE from "@images/png/itlwhite.svg";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
+import { useTranslation } from "react-i18next";
 
 const Header = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const handleAccess = () => {
     navigate("/login", { replace: true });
   };
@@ -12,19 +14,24 @@ const Header = () => {
       <img src={TecNMICON} alt="TecNMICON" className=" hidden md:block h-12" />
       <img src={TecNMICONWHITE} alt="TecNMICON" className="md:hidden h-12" />
       <div className="flex flex-row items-center gap-4">
-        <nav>
-          <ul className="flex flex-row gap-4 md:gap-8 font-bold text-white text-xs md:text-sm ">
-            <li className="hover:text-gray-300 transition-transform transform hover:scale-110">
-              <a href="/tecnm">TecNM</a>
-            </li>
-            <li className="hover:text-gray-300 transition-transform transform hover:scale-110">
-              <a href="/social-service">Servicio Social</a>
-            </li>
-            <li className="hover:text-gray-300 transition-transform transform hover:scale-110">
-              <a href="/socialitec">SocialITEC</a>
-            </li>
-          </ul>
-        </nav>
+          <Link
+          to="/tecnm"
+          className="!text-white hover:underline text-secondary text-[12px] md:text-sm"
+        >
+          {t("LOGIN.HEADER.ABOUTTEC")}
+        </Link>
+        <Link
+          to="/social-service"
+          className="!text-white hover:underline text-secondary text-[12px] md:text-sm"
+        >
+          {t("LOGIN.HEADER.SERVICE")}
+        </Link>
+        <Link
+          to="/socialitec"
+          className="!text-white hover:underline text-secondary text-[12px] md:text-sm"
+        >
+          {t("LOGIN.HEADER.SOCIALITEC")}
+        </Link>
         <button className="create" onClick={handleAccess}>
           Acceder
         </button>
