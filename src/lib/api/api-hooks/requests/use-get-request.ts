@@ -4,7 +4,7 @@ import { useAuth } from "@contexts/authContext";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
-export const useGetRequest = (request_id: number|undefined) => {
+export const useGetRequest = (request_id: number) => {
   const { token } = useAuth();
 
   const [request, setRequest] = useState<Request | null>(null);
