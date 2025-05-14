@@ -3,7 +3,7 @@ frontend:
   phases:
     preBuild:
       commands:
-        - npm ci
+        - npx npm@8 ci # Fuerza usar npm 8 que maneja mejor las peer dependencies
     build:
       commands:
         - npm run build
@@ -14,7 +14,14 @@ frontend:
   cache:
     paths:
       - node_modules/**/*
+      - .npm # Agrega caché para npm
+  environment:
+    variables:
+      NODE_ENV: production
+      
+appRoot: . # Asegúrate que Amplify busque en el directorio raíz
+
 redirects:
-  - source: '/<*>'
+  - source: '/*'
     target: '/index.html'
     status: 200
