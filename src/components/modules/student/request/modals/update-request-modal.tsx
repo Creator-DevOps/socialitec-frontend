@@ -108,7 +108,7 @@ const UpdateRequestModal: React.FC = () => {
       });
       return;
     }
-    await handleUpdate({ ...data, coordinator_id: user?.user_id || 0 });
+    await handleUpdate({ ...data });
     closeEdit();
   };
   const institutionName = selected?.institution.institution_name;

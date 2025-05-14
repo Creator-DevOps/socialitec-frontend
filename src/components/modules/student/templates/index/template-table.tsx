@@ -19,7 +19,7 @@ function TemplatesContent() {
   const { user } = useAuth();
   const userId = user?.user_id || 0;
 
-  const { request,loading:load } = useGetRequestUser(user?.user_id);
+  const { request,loading:load } = useGetRequestUser(user?.user_id||0);
   return (
     <Card>
       {load?<Loader/>:!request ? (
