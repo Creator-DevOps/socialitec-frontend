@@ -17,8 +17,7 @@ export const useRecoverPassword = () => {
 
     try {
       const response = await fetch(
-        // Asegúrate de que aquí apuntas al endpoint correcto:
-        `${import.meta.env.VITE_API_NODE}`,
+        "https://recovery-password-api-tcg2.vercel.app/api/recover",
         {
           method: "PUT",
           headers: {
