@@ -3,6 +3,7 @@ import AnimatedModalContainer from "@/components/containers/modal.container";
 import { t } from "i18next";
 import { useAuth } from "@contexts/authContext";
 import { useNavigate } from "react-router-dom";
+import { useToast } from "@/lib/hooks/use-toast";
 interface LogoutModalProps {
   visible: boolean;
   onClose: () => void;
@@ -12,11 +13,17 @@ interface LogoutModalProps {
 const LogoutModal = ({ visible, onClose }: LogoutModalProps) => {
   const { logout } = useAuth();
   const navigate = useNavigate();
+  const { toastSuccess, toastError, toastWarning } = useToast();
 
   const handleLogout = async () => {
     setTimeout(() => {
       logout();       
-      onClose();     
+      onClose(); 
+       toastSuccess({
+      id: 192,
+      title: "¡Éxito!",
+      message: "Cierre de sessión exitoso",
+    });    
       navigate("/login", { replace: true });
     }, 500); 
   };

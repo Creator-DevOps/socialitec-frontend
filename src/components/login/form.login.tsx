@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { useLoginUser } from "@lib/api/api-hooks/use-LoginUser";
 import Loader from "../ui-componets/load/Loader";
+import RecoverPasswordModal from "./modals/recover-password-modal";
 
 import TEC from "@png/TecVertical.svg";
 import ITL from "@png/itl.svg";
@@ -19,6 +20,7 @@ const FormLogin: React.FC = () => {
   const navigate = useNavigate();
   const { loginUser, loading, error } = useLoginUser();
   const { toastSuccess, toastError, toastWarning } = useToast();
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const {
     register,
@@ -29,7 +31,7 @@ const FormLogin: React.FC = () => {
   const onFormSubmit = async (data: FormData) => {
     try {
       const { user } = await loginUser(data.email, data.password);
-      
+
       if (user.user_type === 0) {
         navigate(`/admin/${user.user_id}/profile`, { replace: true });
       } else if (user.user_type === 1) {
@@ -37,16 +39,24 @@ const FormLogin: React.FC = () => {
       } else if (user.user_type === 2) {
         navigate(`/student/${user.user_id}/profile`, { replace: true });
       } else {
-        toastError({ id: 25, title: 'Error', message: 'Tipo de usuario desconocido' });
+        toastError({
+          id: 25,
+          title: "Error",
+          message: "Tipo de usuario desconocido",
+        });
       }
     } catch (err) {
-      toastError({ id: 26, title: 'Error', message: 'Error al iniciar sessión' });
+      toastError({
+        id: 26,
+        title: "Error",
+        message: "Error al iniciar sessión",
+      });
     }
   };
 
   return (
     <>
-    {loading && <Loader />}
+      {loading && <Loader />}
       <div className="w-full max-w-md mx-auto px-4">
         <div className="flex flex-row md:hidden items-center justify-between pb-10">
           <img src={TEC} alt="TecNM LOGO" className="w-30 h-30" />
@@ -103,10 +113,18 @@ const FormLogin: React.FC = () => {
         </form>
 
         <div className="mt-4 text-sm text-left">
-          <a href="#" className="text-secondary hover:underline">
+          <p
+            className="text-secondary hover:underline hover:cursor-pointer"
+            onClick={() => setIsModalOpen(true)}
+          >
             {t("LOGIN.FORGOT_PASSWORD")}
-          </a>
+          </p>
         </div>
+        {/* Modal */}
+        <RecoverPasswordModal
+          visible={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+        />
       </div>
     </>
   );
