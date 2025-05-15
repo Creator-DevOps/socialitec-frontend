@@ -14,6 +14,7 @@ export default defineConfig({
       }
     },
     chunkSizeWarningLimit: 1000 // Adjust if needed
+
   },
   plugins: [react(), tailwindcss()],
   resolve: {
