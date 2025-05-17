@@ -16,6 +16,7 @@ interface CreateInput {
   progress_status: number;
   completed_hours: number;
   feedback: string;
+  cycle_id:number;
 }
 interface UpdateInput {
   student_id?: number;
@@ -25,6 +26,7 @@ interface UpdateInput {
   progress_status?: number;
   completed_hours?: number;
   feedback?: string;
+  cycle_id?:number;
 }
 
 interface ContextValue {
@@ -108,6 +110,7 @@ export const RequestsProvider = ({ children }: { children: ReactNode }) => {
         progress_status: data.progress_status,
         completed_hours: data.completed_hours,
         feedback: data.feedback,
+        cycle_id:data.cycle_id
       });
       await refetch();
       toastSuccess({
@@ -158,6 +161,9 @@ export const RequestsProvider = ({ children }: { children: ReactNode }) => {
         }),
         ...(data.feedback !== undefined && {
           feedback: data.feedback,
+        }),
+        ...(data.cycle_id !== undefined && {
+          cycle_id: data.cycle_id,
         }),
       });
       await refetch();

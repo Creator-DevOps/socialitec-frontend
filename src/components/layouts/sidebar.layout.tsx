@@ -1,4 +1,4 @@
-import React, { ReactNode, useEffect, useState } from "react";
+import React, { ReactNode, useEffect, useRef, useState } from "react";
 import { IconButton } from "@components/ui-componets/buttons/iconButton";
 import Icon from "@icons/iconG.svg";
 import { useTranslation } from "react-i18next";
@@ -44,8 +44,28 @@ const Sidebar: React.FC<SidebarProps> = ({
   useBackButtonLogout(() => setShowLogoutModal(true));
 
   const { t } = useTranslation();
+  const sidebarRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (
+        sidebarOpen &&
+        window.innerWidth < 768 &&
+        sidebarRef.current &&
+        !sidebarRef.current.contains(e.target as Node)
+      ) {
+        onClose();
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () =>
+      document.removeEventListener("mousedown", handleClickOutside);
+  }, [sidebarOpen, onClose]);
+
   return (
     <aside
+    ref={sidebarRef}
       className={`
       ${sidebarOpen ? "block" : "hidden"}
       w-55 md:w-70 pb-4 bg-gray-50 flex flex-col h-full border border-gray-100

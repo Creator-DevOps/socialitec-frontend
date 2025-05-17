@@ -117,6 +117,7 @@ export const RequestsProvider = ({ children }: { children: ReactNode }) => {
         title: "¡Éxito!",
         message: "Solicitud creada correctamente",
       });
+      window.location.reload();
       closeCreate();
     } catch {
       toastError({

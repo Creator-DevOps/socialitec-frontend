@@ -79,9 +79,8 @@ const TecNM = () => {
             <h2 className="font-bold text-xl sm:text-2xl text-primary text-center">
               Contacto
             </h2>
-            <p>
-              Para más información, puedes comunicarte con el TecNM León a
-              través de los siguientes medios:
+            <p className="text-center px-4">
+              Para más información, puedes comunicarte con el TecNM León:
             </p>
             <ul className="list-disc text-left px-10">
               <li>

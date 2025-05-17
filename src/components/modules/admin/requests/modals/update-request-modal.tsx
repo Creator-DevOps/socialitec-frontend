@@ -1,17 +1,20 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import ModalContainer from "@/components/containers/modal.container";
 import { useForm } from "react-hook-form";
 import { FormInput } from "@/components/forms/inputs/form-input";
 import { useRequests } from "../index/request-context";
 import { useAuth } from "@/contexts/authContext";
 import { useToast } from "@/lib/hooks/use-toast";
+import { useGetAllInstitutions } from "@/lib/api/api-hooks/institutions/use-get-all-institutions";
+import { useGetProgramsByInstitution } from "@/lib/api/api-hooks/programs/use-get-programs-by-institution";
+import { useGetReportCycle } from "@/lib/api/api-hooks/reports/cycles/use-get-cycle";
 
 interface FormValues {
   request_id?: number;
   student_id?: number;
   institution_id: number;
   program_id: number;
-  acceptance_status: number;
+  acceptance_status?: number;
   progress_status: number;
   completed_hours: number;
   feedback: string;
@@ -19,12 +22,13 @@ interface FormValues {
 }
 
 const UpdateRequestModal: React.FC = () => {
-  const { isEditOpen, selected, closeEdit, handleUpdate, requests } =
-    useRequests();
-
+  const { isEditOpen, selected, closeEdit, handleUpdate, requests } = useRequests();
   const { toastSuccess, toastError, toastWarning } = useToast();
   const { user } = useAuth();
-
+  const { institutions } = useGetAllInstitutions();
+  const [selectedInstitution, setSelectedInstitution] = useState<number | null>(null);
+  const { programs } = useGetProgramsByInstitution(selectedInstitution || 0);
+  const {reportCycle,loading}=useGetReportCycle(selected?.cycle_id||0);
   const {
     register,
     handleSubmit,
@@ -48,8 +52,10 @@ const UpdateRequestModal: React.FC = () => {
   const watchAcceptance = watch("acceptance_status");
   const watchProgress = watch("progress_status");
   const watchCompleted = watch("completed_hours");
-  const selectedInstitution = watch("institution_id");
+  const watchInstitution = watch("institution_id");
+  const watchProgram = watch("program_id");
 
+  // Set initial values when selected changes
   useEffect(() => {
     if (selected) {
       setValue("student_id", selected.student_id);
@@ -59,15 +65,25 @@ const UpdateRequestModal: React.FC = () => {
       setValue("progress_status", selected.progress_status);
       setValue("completed_hours", selected.completed_hours);
       setValue("feedback", selected.feedback || "");
+      setSelectedInstitution(selected.institution.institution_id);
     }
   }, [selected, setValue]);
 
+  // Reset form when modal closes
   useEffect(() => {
     if (!isEditOpen) reset();
   }, [isEditOpen, reset]);
 
-  // Validation
+  // Update selected institution when institution_id changes
   useEffect(() => {
+    if (watchInstitution) {
+      setSelectedInstitution(watchInstitution);
+    }
+  }, [watchInstitution]);
+
+  // Field-level validation
+  useEffect(() => {
+    // completed_hours validation
     if (watchCompleted < 0) {
       setError("completed_hours", {
         type: "min",
@@ -84,6 +100,8 @@ const UpdateRequestModal: React.FC = () => {
     } else {
       clearErrors("completed_hours");
     }
+
+    // progress_status validation
     if (watchAcceptance !== 1 && watch("progress_status") > 0) {
       setError("progress_status", {
         type: "invalid",
@@ -108,22 +126,25 @@ const UpdateRequestModal: React.FC = () => {
       });
       return;
     }
-    await handleUpdate({ ...data, coordinator_id: user?.user_id || 0 });
+    
+    await handleUpdate({ 
+      ...data, 
+      coordinator_id: user?.user_id || 0
+    });
     closeEdit();
   };
-  const institutionName = selected?.institution.institution_name;
-  const programName = selected?.program.program_name;
 
   if (!isEditOpen || !selected) return null;
 
   return (
     <ModalContainer visible onClose={closeEdit}>
       <div className="flex flex-col gap-6 md:px-6">
-        <h2 className="text-2xl font-bold text-primary text-center">
-          Editar Solicitud
-        </h2>
+        <h2 className="text-2xl font-bold text-primary text-center">Editar Solicitud</h2>
+        <h3 className="text-sm text-center font-bold text-secondary">
+          {loading?"Cargando...":reportCycle?.name}
+        </h3>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-          {/* Student Info */}
+          {/* Student Info (readonly) */}
           <FormInput
             name="control_number"
             label="Alumno"
@@ -135,31 +156,71 @@ const UpdateRequestModal: React.FC = () => {
             value={selected.student.name}
             disabled
           />
-          <input
-            type="hidden"
-            {...register("student_id", { valueAsNumber: true })}
-          />
-          <FormInput
-            name="institution_id"
-            label="Institución"
-            type="text"
-            register={register}
-            errors={errors}
-            rules={{}}
-            value={institutionName}
-            disabled
-          />
-          <FormInput
-            name="program_id"
-            label="Programa"
-            type="text"
-            register={register}
-            errors={errors}
-            rules={{}}
-            value={programName}
-            disabled
-          />
-          {/* Horas Completadas & Feedback & Status */}
+          <input type="hidden" {...register("student_id", { valueAsNumber: true })} />
+
+          {/* Institución (editable) */}
+          <div className="flex flex-col gap-1">
+            <label htmlFor="institution_id" className="font-semibold text-xs md:text-sm">Institución</label>
+            <select
+              id="institution_id"
+              {...register("institution_id", { 
+                required: "Institución obligatoria", 
+                valueAsNumber: true 
+              })}
+              defaultValue={selected?.institution.institution_id || ""}
+              onChange={(e) => {
+                setValue("institution_id", Number(e.target.value));
+                setValue("program_id", 0); // Reset program when institution changes
+              }}
+              className={`border-b border-gray-300 focus:outline-none focus:border-secondary text-xs md:text-sm py-1 ${
+                errors.institution_id ? "border-red-500" : ""
+              }`}
+            >
+              <option value="">— Selecciona —</option>
+              {institutions.map((inst) => (
+                <option 
+                  key={inst.institution_id} 
+                  value={inst.institution_id}
+                >
+                  {inst.institution_name}
+                </option>
+              ))}
+            </select>
+            {errors.institution_id && (
+              <p className="text-red-500 !text-xs mt-1">{errors.institution_id.message}</p>
+            )}
+          </div>
+
+          {/* Programa (editable, depends on institution) */}
+          <div className="flex flex-col gap-1">
+            <label htmlFor="program_id" className="font-semibold text-xs md:text-sm">Programa</label>
+            <select
+              id="program_id"
+              {...register("program_id", { 
+                valueAsNumber: true 
+              })}
+              defaultValue={selected?.program_id || ""}
+              disabled={!watchInstitution}
+              className={`border-b border-gray-300 focus:outline-none focus:border-secondary text-xs md:text-sm py-1 ${
+                errors.program_id ? "border-red-500" : ""
+              }`}
+            >
+              <option value="">— Selecciona —</option>
+              {programs.map((prog) => (
+                <option 
+                  key={prog.program_id} 
+                  value={prog.program_id}
+                >
+                  {prog.program_name}
+                </option>
+              ))}
+            </select>
+            {errors.program_id && (
+              <p className="text-red-500 !text-xs mt-1">{errors.program_id.message}</p>
+            )}
+          </div>
+
+          {/* Resto del formulario (sin cambios)... */}
           <FormInput
             name="completed_hours"
             label="Horas Completadas"
@@ -172,6 +233,7 @@ const UpdateRequestModal: React.FC = () => {
               min: { value: 0, message: "No valores negativos" },
             }}
           />
+
           <FormInput
             name="feedback"
             label="Feedback"
@@ -179,16 +241,15 @@ const UpdateRequestModal: React.FC = () => {
             register={register}
             errors={errors}
           />
+
           <div className="flex flex-col gap-1">
-            <label
-              htmlFor="acceptance_status"
-              className="font-semibold text-xs md:text-sm"
-            >
+            <label htmlFor="acceptance_status" className="font-semibold text-xs md:text-sm">
               Estado de Aceptación
             </label>
             <select
               id="acceptance_status"
               {...register("acceptance_status", { valueAsNumber: true })}
+              defaultValue={selected?.acceptance_status}
               className="border-b border-gray-300 focus:outline-none focus:border-secondary text-xs md:text-sm py-1"
               disabled={watchProgress >= 1}
             >
@@ -203,16 +264,15 @@ const UpdateRequestModal: React.FC = () => {
               </option>
             </select>
           </div>
+
           <div className="flex flex-col gap-1">
-            <label
-              htmlFor="progress_status"
-              className="font-semibold text-xs md:text-sm"
-            >
+            <label htmlFor="progress_status" className="font-semibold text-xs md:text-sm">
               Estado de Progreso
             </label>
             <select
               id="progress_status"
               {...register("progress_status", { valueAsNumber: true })}
+              defaultValue={selected?.progress_status}
               className="border-b border-gray-300 focus:outline-none focus:border-secondary text-xs md:text-sm py-1"
               disabled={watchAcceptance !== 1}
             >
@@ -225,7 +285,7 @@ const UpdateRequestModal: React.FC = () => {
               </option>
             </select>
           </div>
-          {/* Actions */}
+
           <div className="flex justify-end gap-4 pt-4">
             <button type="button" onClick={closeEdit} className="cancel">
               Cancelar
