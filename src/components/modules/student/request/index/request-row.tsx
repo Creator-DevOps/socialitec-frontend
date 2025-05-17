@@ -81,7 +81,7 @@ const RequestRow = ({ item }: Props) => {
           />
           <OpcionMenu
             icon={<img src={AdminiIcon} alt="Administrar" className="w-5" />}
-            text="Gestinar"
+            text="Gestionar"
             onClick={() => openPanel(item)}
           />
         </MenuDesplegable>
