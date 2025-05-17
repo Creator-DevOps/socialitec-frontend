@@ -14,6 +14,7 @@ import { useToast } from "@/lib/hooks/use-toast";
 import { useGetStudent } from "@/lib/api/api-hooks/students/use-get-student";
 import { useGetReportCycle } from "@/lib/api/api-hooks/reports/cycles/use-get-cycle";
 import { useGetReportCycles } from "@/lib/api/api-hooks/reports/cycles/use-get-cycles";
+import { useGetAllReportCycles } from "@/lib/api/api-hooks/reports/cycles/use-get-all-cycles";
 
 interface FormValues {
   control_number: string;
@@ -45,7 +46,7 @@ const CreateRequestModal: React.FC = () => {
   const { institutions } = useGetAllInstitutions();
   const { toastSuccess, toastError, toastWarning } = useToast();
   const { user } = useAuth();
-  const { reportCycles } = useGetReportCycles(1, 10);
+  const { reportCycles } = useGetAllReportCycles();
 
   const {
     register,
@@ -119,39 +120,14 @@ const CreateRequestModal: React.FC = () => {
   );
   const { programs } = useGetProgramsByInstitution(selectedInstitution || 0);
 
-  useEffect(() => {
-  if (reportCycles.length === 0) {
-    // aún no llegaron los ciclos, o no hay ninguno
-    setValue("cycle_id", 0);
-    setCycleOpen(false);
-    return;
-  }
 
   const today = new Date();
   const current = reportCycles.find(({ start_date, end_date }) => {
     return today >= new Date(start_date) && today <= new Date(end_date);
   });
 
-  if (current) {
-    setValue("cycle_id", current.cycle_id, { shouldValidate: true });
-    setCycleOpen(true);
-  } else {
-    setValue("cycle_id", 0);
-    setCycleOpen(false);
-  }
-}, [reportCycles, setValue]);
 
   const onSubmit = async (data: FormValues) => {
-    // si no hay ciclo abierto, avisamos y salimos
-    if (!cycleOpen) {
-      toastWarning({
-        id: 200,
-        title: "Proceso cerrado",
-        message: "No ha abierto el proceso aún",
-      });
-      return;
-    }
-
     const exists = requests.find((r) => r.student_id === user?.user_id);
     if (exists) {
       toastError({
@@ -159,25 +135,15 @@ const CreateRequestModal: React.FC = () => {
         title: "Error",
         message: "Este alumno ya tiene una solicitud registrada",
       });
-      // … limpia form
       return;
     }
 
-    try {
-      await handleCreate({ ...data, student_id: user?.user_id ||0,});
-      toastSuccess({
-        id: 140,
-        title: "¡Éxito!",
-        message: "Solicitud creada correctamente",
-      });
-      // … limpia y cierra
-    } catch {
-      toastError({
-        id: 151,
-        title: "Error",
-        message: "No se pudo crear la solicitud",
-      });
-    }
+    await handleCreate({
+      ...data,
+      student_id: user?.user_id || 0,
+      cycle_id: current?.cycle_id || 0,
+    });
+
   };
 
   if (!isCreateOpen) return null;
@@ -188,6 +154,9 @@ const CreateRequestModal: React.FC = () => {
         <h2 className="text-2xl font-bold text-primary text-center">
           Agregar Solicitud
         </h2>
+        <h3 className="text-sm text-center font-bold text-secondary">
+          {current?.name}
+        </h3>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 relative">
           <FormInput
             name="student_id"
@@ -267,7 +236,7 @@ const CreateRequestModal: React.FC = () => {
             <button type="button" onClick={closeCreate} className="cancel">
               Cancelar
             </button>
-            <button type="submit" className="create"  disabled={!cycleOpen}>
+            <button type="submit" className="create">
               Guardar
             </button>
           </div>

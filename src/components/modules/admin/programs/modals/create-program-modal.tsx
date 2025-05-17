@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { FormInput } from "@/components/forms/inputs/form-input";
 import { usePrograms } from "../index/program-context";
 import { useGetAllInstitutions } from "@lib/api/api-hooks/institutions/use-get-all-institutions";
+import Loader from "@/components/ui-componets/load/Loader";
 
 interface FormValues {
   institution_id: number;
@@ -32,7 +33,7 @@ const CreateProgramModal: React.FC = () => {
 
   const onSubmit = async (data: FormValues) => {
     await handleCreate(data);
-    //reset();
+    reset();
   };
 
   if (!isCreateOpen) return null;

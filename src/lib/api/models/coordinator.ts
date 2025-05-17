@@ -5,6 +5,28 @@ export interface Coordinator {
     departament: string;
     user_type: number;
   }
+  export interface Admin{
+        user_id: number;
+    name: string;
+    email: string;
+     position:string;
+     user_type:number;
+  }
+  export interface User {
+  user_id: number;
+  name: string;
+  email: string;
+  user_type: number;
+  position?: string;
+  departament?: string;
+  control_number?: string;
+  major?: string;
+  semester?: number;
+  credits?: number;
+  status?: string;
+  hours?: number;
+}
+
   
   export interface CoordinatorResponse {
     message: string;

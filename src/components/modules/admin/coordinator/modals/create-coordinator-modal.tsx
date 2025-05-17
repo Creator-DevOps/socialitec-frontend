@@ -21,7 +21,7 @@ const CreateCoordinatorModal: React.FC = () => {
 
   const onSubmit = async (data: FormValues) => {
     await handleCreate(data);
-    //reset();
+    reset();
   };
 
   if (!isCreateOpen) return null;

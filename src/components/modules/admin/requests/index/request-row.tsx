@@ -22,8 +22,8 @@ const RequestRow = ({ item }: Props) => {
 
   const acceptanceClass =
     {
-      0: "text-yellow-500", // Pendiente
-      1: "text-secondary", // Aceptada
+      0: "text-black", // Pendiente
+      1: "text-green-500", // Aceptada
       2: "text-red-500", // Rechazada
     }[item.acceptance_status] || "";
 
@@ -31,7 +31,7 @@ const RequestRow = ({ item }: Props) => {
     {
       0: "text-black", // Pendiente
       1: "text-yellow-500", // En proceso
-      2: "text-secondary", // Finalizada
+      2: "text-green-500", // Finalizada
     }[item.progress_status] || "";
 
   return (

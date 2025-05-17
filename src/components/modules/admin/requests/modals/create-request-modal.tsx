@@ -12,6 +12,7 @@ import XLogo from "@icons/X.svg";
 import { IconButton } from "@/components/ui-componets/buttons/iconButton";
 import { useToast } from "@/lib/hooks/use-toast";
 import { useGetStudent } from "@/lib/api/api-hooks/students/use-get-student";
+import { useGetAllReportCycles } from "@/lib/api/api-hooks/reports/cycles/use-get-all-cycles";
 
 interface FormValues {
   control_number: string;
@@ -22,6 +23,7 @@ interface FormValues {
   progress_status: number;
   completed_hours: number;
   feedback: string;
+  cycle_id: number;
   [key: string]: unknown;
 }
 
@@ -34,6 +36,7 @@ const defaultValues: FormValues = {
   progress_status: 0,
   completed_hours: 0,
   feedback: "",
+  cycle_id: 0,
 };
 
 const CreateRequestModal: React.FC = () => {
@@ -67,6 +70,7 @@ const CreateRequestModal: React.FC = () => {
   const debounceRef = useRef<NodeJS.Timeout>();
   const dropdownRef = useRef<HTMLUListElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+   const { reportCycles } = useGetAllReportCycles();
 
 
   const { requests } = useRequests();
@@ -143,19 +147,26 @@ const CreateRequestModal: React.FC = () => {
     }
   }, [watchAcceptance, watchCompleted, watch, setError, clearErrors]);
 
+
+   const today = new Date();
+  const current = reportCycles.find(({ start_date, end_date }) => {
+    return today >= new Date(start_date) && today <= new Date(end_date);
+  });
+
+
   const onSubmit = async (data: FormValues) => {
     if (!selectedStudent) {
-      toastError({ id: 7, title: "Error", message: "Selecciona un alumno válido" });
+      toastError({ id: 77, title: "Error", message: "Selecciona un alumno válido" });
       return;
     }
     
     if (selectedStudent.credits < 180) {
-      toastWarning({ id: 8, title: "¡Advertencia!", message: "El alumno no cumple 180 créditos" });
+      toastWarning({ id: 78, title: "¡Advertencia!", message: "El alumno no cumple 180 créditos" });
       return;
     }
     const exists = requests.find(r => r.student_id === selectedStudent.user_id);
     if (exists) {
-      toastError({ id: 8, title: "Error", message: "Este alumno ya tiene una solicitud registrada" });
+      toastError({ id: 19, title: "Error", message: "Este alumno ya tiene una solicitud registrada" });
       reset(defaultValues);
       setInputValue("");
       setSelectedStudent(null);
@@ -163,19 +174,15 @@ const CreateRequestModal: React.FC = () => {
       setShowDropdown(false);
       return;
     }
-    try {
-      await handleCreate({ ...data, coordinator_id: user?.user_id || 0 });
-      toastSuccess({ id: 10, title: "¡Éxito!", message: "Solicitud creada correctamente" });
-      // Limpia para una posible nueva creación
+
+      await handleCreate({ ...data, coordinator_id: user?.user_id || 0,cycle_id: current?.cycle_id || 0, });
       reset(defaultValues);
       setInputValue("");
       setSelectedStudent(null);
       setStudentQuery("");
       setShowDropdown(false);
       closeCreate();
-    } catch {
-      toastError({ id: 11, title: "Error", message: "No se pudo crear la solicitud" });
-    }
+    
   };
 
   if (!isCreateOpen) return null;
@@ -184,6 +191,9 @@ const CreateRequestModal: React.FC = () => {
     <ModalContainer visible onClose={closeCreate}>
       <div className="flex flex-col gap-6 md:px-6">
         <h2 className="text-2xl font-bold text-primary text-center">Agregar Solicitud</h2>
+        <h3 className="text-sm text-center font-bold text-secondary">
+          {current?.name}
+        </h3>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 relative">
           {/* Autocomplete alumno */}
           <div className="relative flex items-center">

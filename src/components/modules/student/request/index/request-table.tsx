@@ -25,9 +25,10 @@ function RequestsContent() {
         <h6 className="text-2xl font-bold text-primary flex-1">Solicitud</h6>
         <div className="flex items-center gap-4">
           {/* <SearchRequest /> */}
-          <button onClick={openCreate} className={`${!request?"":"hidden"} create`}>
+          {user && (user.credits ||0)>=180?<button onClick={openCreate} className={`${!request?"":"hidden"} create`}>
             +Nueva
-          </button>
+          </button>:null}
+          
         </div>
       </CardHeader>
       {load?<Loader/>:!request ? (

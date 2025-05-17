@@ -1,3 +1,4 @@
+import { fetchCurrentUser } from "@/lib/api/api-hooks/use-get-current-user";
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
 
 export interface User {
@@ -34,15 +35,25 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const isAuthenticated = Boolean(user && token);
 
   useEffect(() => {
-    const storedUser = localStorage.getItem("user");
-    const storedToken = localStorage.getItem("token");
+    const initAuth = async () => {
+      const storedToken = localStorage.getItem("token");
+      const storedUser = localStorage.getItem("user");
 
-    if (storedUser && storedToken) {
-      setUser(JSON.parse(storedUser));
-      setToken(storedToken);
-    }
-    setLoading(false);
+      if (storedToken) {
+        const currentUser = await fetchCurrentUser(storedToken);
+        
+        if (currentUser) {
+          login(currentUser, storedToken);
+        } else {
+          logout(); 
+        }
+      }
+      setLoading(false);
+    };
+
+    initAuth();
   }, []);
+  
    useEffect(() => {
     const handleStorage = (e: StorageEvent) => {
       if (e.key === "user") {

@@ -34,10 +34,25 @@ const FormLogin: React.FC = () => {
 
       if (user.user_type === 0) {
         navigate(`/admin/${user.user_id}/profile`, { replace: true });
+        toastSuccess({
+          id: 125,
+          title: "¡Éxito!",
+          message: `Bienvenido ${user.name}`,
+        });
       } else if (user.user_type === 1) {
         navigate(`/admin/${user.user_id}/profile`, { replace: true });
+        toastSuccess({
+          id: 126,
+          title: "¡Éxito!",
+          message: `Bienvenido ${user.name}`,
+        });
       } else if (user.user_type === 2) {
         navigate(`/student/${user.user_id}/profile`, { replace: true });
+        toastSuccess({
+          id: 127,
+          title: "¡Éxito!",
+          message: `Bienvenido ${user.name}`,
+        });
       } else {
         toastError({
           id: 25,
