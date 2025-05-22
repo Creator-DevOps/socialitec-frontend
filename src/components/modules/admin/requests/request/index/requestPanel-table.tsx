@@ -266,7 +266,9 @@ function ReportsContent() {
                 <h2 className="font-bold md:text-lg text-xl text-secondary">
                   General
                 </h2>
-
+                <p className="!text-sm">
+                  <strong>Solicitud:</strong> {request?.request_id}
+                </p>
                 <p className="!text-sm">
                   <strong>Fecha creación:</strong>{" "}
                   {new Date(request?.created_at || 0).toLocaleString()}
@@ -471,7 +473,7 @@ function ReportsContent() {
       <UpdateReportModal />
       <DeleteReportModal />
       <ShowReportModal />
-      <ShowLetterModal/>
+      <ShowLetterModal />
     </Card>
   );
 }
