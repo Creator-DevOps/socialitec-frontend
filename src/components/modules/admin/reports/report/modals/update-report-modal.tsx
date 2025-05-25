@@ -12,6 +12,7 @@ interface FormValues {
   report_number?: number;
   status?: number;
   file?: FileList;
+  feedback?:string;
   [key: string]: unknown;
 }
 
@@ -55,6 +56,7 @@ const UpdateReportModal: React.FC = () => {
       ...(data.document_name   !== undefined && { document_name: data.document_name }),
       ...(data.report_number   !== undefined && { report_number: data.report_number }),
       ...(data.status          !== undefined && { status: data.status }),
+      ...(data.feedback         !== undefined && { feedback: data.feedback }),
       ...(file                  && { file }),
     });
     reset();
@@ -106,6 +108,13 @@ const UpdateReportModal: React.FC = () => {
             register={register}
             errors={errors}
             rules={{ valueAsNumber: true, required: "Estatus obligatorio" }}
+          />
+          <FormInput
+            name="feedback"
+            label="Retroalimentación"
+            placeholder="Ej. Todo correcto"
+            register={register}
+            errors={errors}
           />
 
           <FileInput

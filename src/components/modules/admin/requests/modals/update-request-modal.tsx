@@ -17,6 +17,8 @@ interface FormValues {
   acceptance_status?: number;
   progress_status: number;
   completed_hours: number;
+    coordinator_id?:number;
+
   feedback: string;
   [key: string]: unknown;
 }

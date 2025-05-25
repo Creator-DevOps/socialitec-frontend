@@ -14,9 +14,10 @@ interface CreateInput {
   acceptance_status: number;
   progress_status: number;
   completed_hours: number;
-  coordinator_id?:number;
+  coordinator_id:number;
   feedback: string;
   cycle_id:number;
+
 }
 interface UpdateInput {
   student_id?: number;
@@ -104,6 +105,7 @@ export const RequestsProvider = ({ children }: { children: ReactNode }) => {
     try {
       await createRequest({
         cycle_id:data.cycle_id,
+        coordinator_id:data.coordinator_id,
         student_id: data.student_id,
         program_id: data.program_id,
         acceptance_status: data.acceptance_status,
