@@ -24,6 +24,8 @@ interface FormValues {
   completed_hours: number;
   feedback: string;
   cycle_id: number;
+    coordinator_id:number;
+
   [key: string]: unknown;
 }
 
@@ -37,6 +39,8 @@ const defaultValues: FormValues = {
   completed_hours: 0,
   feedback: "",
   cycle_id: 0,
+    coordinator_id:0
+
 };
 
 const CreateRequestModal: React.FC = () => {

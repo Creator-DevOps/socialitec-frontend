@@ -17,6 +17,7 @@ import { useGetReportCycles } from "@/lib/api/api-hooks/reports/cycles/use-get-c
 import { useGetAllReportCycles } from "@/lib/api/api-hooks/reports/cycles/use-get-all-cycles";
 
 interface FormValues {
+  coordinator_id:number
   control_number: string;
   student_id: number;
   institution_id: number;
@@ -30,6 +31,7 @@ interface FormValues {
 }
 
 const defaultValues: FormValues = {
+  coordinator_id:0,
   control_number: "",
   student_id: 0,
   institution_id: 0,
@@ -142,6 +144,7 @@ const CreateRequestModal: React.FC = () => {
       ...data,
       student_id: user?.user_id || 0,
       cycle_id: current?.cycle_id || 0,
+      coordinator_id:2
     });
 
   };
