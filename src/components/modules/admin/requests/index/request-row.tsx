@@ -37,10 +37,10 @@ const RequestRow = ({ item }: Props) => {
   return (
     <tr>
       <td className="w-2/5 md:w-1/4">
-        {loading ? "Cargando…" : item.student.name}
+        {loading ? "Cargando…" : item.student?.name}
       </td>
       <td className="w-2/5 md:w-1/4">
-        {loading ? "Cargando…" : item.institution.institution_name}
+        {loading ? "Cargando…" : item.institution?.institution_name}
       </td>
       <td
         className={`hidden md:table-cell w-1/4  font-semibold ${acceptanceClass}`}
